@@ -96,8 +96,6 @@ export default {
         return {}
 
     },
-    watch: {
-    },
     computed: {
         isAllcheck() {
             return this.$store.getters.getisAllcheck

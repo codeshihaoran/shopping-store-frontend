@@ -120,7 +120,8 @@ export default {
     beforeUpdate() {
         this.activeIndex = this.$route.path;
     },
-    created() {
+    // TODO created=>mounted
+    mounted() {
         // 在页面刷新时保留用户登录信息
         // 获取浏览器localStorage 判断用户是否登录
         if (localStorage.getItem('user')) {

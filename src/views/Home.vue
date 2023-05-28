@@ -121,7 +121,6 @@ export default {
             accessoryList: '',//配件热门数据
         }
     },
-
     mounted() {
         // 获取轮播图数据
         axios({

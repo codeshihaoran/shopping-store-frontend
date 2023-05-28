@@ -141,7 +141,8 @@ export default {
             ]
         }
     },
-    created() {
+    // TODO created=>mounted
+    mounted() {
         if (this.$store.getters.getCheckNum < 1) {
             this.$router.push({ path: '/shoppingCart' })
         }

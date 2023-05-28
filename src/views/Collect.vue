@@ -35,7 +35,6 @@ export default {
     components: {
         MyList
     },
-
     mounted() {
         axios({
             method: "post",

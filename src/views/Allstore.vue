@@ -64,8 +64,8 @@ export default {
             pageSize: 15,//每个列表页定义最大数据
         };
     },
-
-    created() {
+    // TODO created=>mounted
+    mounted() {
         // 获取列表页数据
         axios({
             method: "post",
