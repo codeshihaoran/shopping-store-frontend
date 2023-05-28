@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-
+import { ElMessage } from 'element-plus'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import App from './App.vue'
@@ -8,33 +8,20 @@ import './assets/main.css'
 import axios from 'axios'
 import store from './store'
 
-// 全局请求拦截器
-axios.interceptors.request.use(
-    config => {
-        return config
-    },
-    // 对请求错误时做出响应 导航去Error页面
-    error => {
-        router.push({ path: '/error' })
-        return Promise.reject(error)
-    }
 
-)
-//全局响应拦截器
+// 全局响应拦截器
 axios.interceptors.response.use(
     // 对响应的数据做处理
     res => {
-        if (res.data.code == '500') {
-            // 500状态码表示服务器异常
-            router.push({ path: '/error' })
+        if (res.data.code !== '001') {
+            console.log(res);
+            ElMessage.error(`网络出错，错误码${res.data.code}, 错误信息${res.data.msg}`)
+            throw Error(`网络出错，错误码${res.data.code}, 错误信息${res.data.msg}`)
         }
         return res
     },
     // 响应时发生错误
     error => {
-        router.push({
-            path: '/error'
-        })
         return Promise.reject(error)
     }
 )
