@@ -113,7 +113,7 @@ export default {
                 this.isRegister = val
             }
         },
-        // 监听子组件isRegister的值 去更新父组件中register
+        //    TODO 告诉父组件val发生变化 让父组件决定去做些什么
         isRegister: function (val) {
             if (!val) {
                 // 注册完成之后 点击注册发现账号信息初始值还在  

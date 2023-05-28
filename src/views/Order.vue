@@ -94,7 +94,7 @@ export default {
             method: 'post',
             url: '/api/user/order/getOrder',
             data: {
-                user_id: this.$store.getters.getUser.user_id
+                user_id: this.$store.state.user.user.user_id
             }
         }).then(res => {
             this.orders = res.data.orders

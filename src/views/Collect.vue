@@ -40,7 +40,7 @@ export default {
             method: "post",
             url: "/api/user/collect/getCollect",
             data: {
-                user_id: this.$store.getters.getUser.user_id
+                user_id: this.$store.state.user.user.user_id
             }
         }).then(res => {
             if (res.data.code === "001") {

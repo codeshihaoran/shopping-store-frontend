@@ -155,7 +155,7 @@ export default {
                 method: 'post',
                 url: '/api/user/order/addOrder',
                 data: {
-                    user_id: this.$store.getters.getUser.user_id,
+                    user_id: this.$store.state.user.user.user_id,
                     products: this.$store.getters.getCheckGoods
                 }
             }).then(res => {

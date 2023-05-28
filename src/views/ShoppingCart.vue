@@ -113,7 +113,7 @@ export default {
                 url: '/api/user/shoppingCart/deleteShoppingCart',
                 data: {
                     product_id: productID,
-                    user_id: this.$store.getters.getUser.user_id
+                    user_id: this.$store.state.user.user.user_id
                 }
             }).then(res => {
                 if (res.data.code == '001') {

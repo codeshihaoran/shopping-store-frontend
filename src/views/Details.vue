@@ -127,7 +127,7 @@ export default {
         },
         addCollect() {
             // 判断用户是否登录
-            if (!this.$store.getters.getUser) {
+            if (!this.$store.state.user.user) {
                 this.$store.commit('setShowLogin', true)
                 return;
             }
@@ -136,7 +136,7 @@ export default {
                 url: '/api/user/collect/addCollect',
                 data: {
                     product_id: this.productID,
-                    user_id: this.$store.getters.getUser.user_id,
+                    user_id: this.$store.state.user.user.user_id,
                 }
             }).then(res => {
                 if (res.data.code == '001') {
@@ -149,8 +149,7 @@ export default {
             })
         },
         addShoppingCart() {
-            console.log(this.$store.getters.getShoppingCart.length);
-            if (!this.$store.getters.getUser) {
+            if (!this.$store.state.user.user) {
                 this.$store.commit('setShowLogin', true)
                 return;
             }
@@ -158,7 +157,7 @@ export default {
                 method: 'post',
                 url: '/api/user/shoppingCart/addShoppingCart',
                 data: {
-                    user_id: this.$store.getters.getUser.user_id,
+                    user_id: this.$store.state.user.user.user_id,
                     product_id: this.productID
                 }
             }).then(res => {

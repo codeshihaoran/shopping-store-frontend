@@ -4,7 +4,7 @@
         <div class="topbar">
             <div class="nav">
                 <ul>
-                    <li v-if="!this.$store.getters.getUser">
+                    <li v-if="!this.$store.state.user.user.userName">
                         <el-button @click="getLogin">登录</el-button>
                         <Mylogin></Mylogin>
                         <span>|</span>
@@ -22,7 +22,7 @@
                                 <el-button size="small" type="primary" @click="loginOut">确定</el-button>
                             </div>
                             <template #reference>
-                                <el-button @click="visible = true">{{ this.$store.getters.getUser.userName }}</el-button>
+                                <el-button @click="visible = true">{{ this.$store.state.user.user.userName }}</el-button>
                             </template>
                         </el-popover>
 
@@ -36,7 +36,7 @@
                     <li>
                         <router-link to="/shoppingCart">
                             购物车
-                            <span>({{ this.$store.getters.getShoppingCart.length }})</span>
+                            <span>({{ this.$store.state.ShoppingCart.ShoppingCart.length }})</span>
                         </router-link>
                     </li>
                 </ul>
@@ -116,10 +116,6 @@ export default {
             register: false,// 注册对话框是否显示
         }
     },
-
-    beforeUpdate() {
-        this.activeIndex = this.$route.path;
-    },
     // TODO created=>mounted
     mounted() {
         // 在页面刷新时保留用户登录信息
@@ -151,6 +147,12 @@ export default {
                 }).catch(err => {
                     return Promise.reject(err)
                 })
+            }
+        },
+        // TODO watch 监听路由变化 
+        $route: {
+            handler(val) {
+                this.activeIndex = val.path
             }
         }
 
