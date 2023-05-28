@@ -103,9 +103,6 @@
                     <a href="javascript:;" @click="addOrder" class="btn-base btn-primary">结算</a>
                 </div>
             </div>
-
-
-
         </div>
         <!-- 确定订单内容结束 -->
 
