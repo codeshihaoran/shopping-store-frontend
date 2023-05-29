@@ -50,7 +50,8 @@
     </div>
 </template>
 <script>
-import axios from 'axios';
+import { getSomeData } from '../service/index';
+import { allCategoryList } from '../service/index';
 import MyList from '../compentens/MyList.vue';
 export default {
     data() {
@@ -64,13 +65,9 @@ export default {
             pageSize: 15,//每个列表页定义最大数据
         };
     },
-    // TODO created=>mounted
     mounted() {
         // 获取列表页数据
-        axios({
-            method: "post",
-            url: "/api/product/getCategory"
-        }).then(res => {
+        allCategoryList().then(res => {
             const val = {
                 category_id: 0,
                 category_name: "全部",
@@ -106,15 +103,7 @@ export default {
             const api = this.categoryID.length == 0
                 ? '/api/product/getAllProduct'
                 : '/api/product/getProductByCategory'
-            axios({
-                method: 'post',
-                url: api,
-                data: {
-                    categoryID: this.categoryID,
-                    currentPage: this.currentPage,
-                    pageSize: this.pageSize
-                }
-            }).then(res => {
+            getSomeData(api, this.categoryID, this.currentPage, this.pageSize).then(res => {
                 this.product = res.data.Product
                 this.total = res.data.total
             })

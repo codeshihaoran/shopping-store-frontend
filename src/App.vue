@@ -23,7 +23,7 @@ import TopBar from './compentens/TopBar.vue';
 import Header from './compentens/Header.vue';
 import Footer from './compentens/Footer.vue';
 import { mapGetters } from 'vuex'
-import axios from 'axios';
+import { myShoppingCart } from '../src/service/index'
 export default {
     components: {
         TopBar,
@@ -47,18 +47,8 @@ export default {
             if (val == '') {
                 this.$store.commit('setShoppingCart', [])
             } else {
-                axios({
-                    method: 'post',
-                    url: '/api/user/shoppingCart/getShoppingCart',
-                    data: {
-                        user_id: val.user_id
-                    }
-                }).then(res => {
-                    if (res.data.code == '001') {
-                        this.$store.commit('setShoppingCart', res.data.shoppingCartData)
-                    }
-                }).catch(err => {
-                    return Promise.reject(err)
+                myShoppingCart(val.user_id).then(res => {
+                    this.$store.commit('setShoppingCart', res.data.shoppingCartData)
                 })
             }
         },

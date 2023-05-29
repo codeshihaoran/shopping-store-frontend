@@ -76,7 +76,10 @@
 </template>
 
 <script>
-import axios from 'axios';
+import { getDetailsPictureInfo } from '../service/index'
+import { getDetailsInfo } from '../service/index'
+import { addcollect } from '../service/index'
+import { addShopping } from '../service/index';
 export default {
     data() {
         return {
@@ -103,25 +106,13 @@ export default {
     methods: {
         // 获取商品详细信息数据
         getDetails() {
-            axios({
-                method: 'post',
-                url: '/api/product/getDetails',
-                data: {
-                    productID: this.productID
-                }
-            }).then(res => {
+            getDetailsInfo(this.productID).then(res => {
                 this.productDetails = res.data.Product[0]
             })
         },
         // 获取商品图片数据
         getDetailsPicture() {
-            axios({
-                method: 'post',
-                url: '/api/product/getDetailsPicture',
-                data: {
-                    productID: this.productID
-                }
-            }).then(res => {
+            getDetailsPictureInfo(this.productID).then(res => {
                 this.productPicture = res.data.ProductPicture
             })
         },
@@ -131,21 +122,7 @@ export default {
                 this.$store.commit('setShowLogin', true)
                 return;
             }
-            axios({
-                method: 'post',
-                url: '/api/user/collect/addCollect',
-                data: {
-                    product_id: this.productID,
-                    user_id: this.$store.state.user.user.user_id,
-                }
-            }).then(res => {
-                if (res.data.code == '001') {
-
-                } else {
-                    console.log(res.data.msg);
-                }
-            }).catch(err => {
-                return Promise.reject(err)
+            addcollect(this.productID, this.$store.state.user.user.user_id).then(res => {
             })
         },
         addShoppingCart() {
@@ -153,23 +130,8 @@ export default {
                 this.$store.commit('setShowLogin', true)
                 return;
             }
-            axios({
-                method: 'post',
-                url: '/api/user/shoppingCart/addShoppingCart',
-                data: {
-                    user_id: this.$store.state.user.user.user_id,
-                    product_id: this.productID
-                }
-            }).then(res => {
-                if (res.data.code == '001') {
-                    this.$store.commit('unshiftShoppingCart', res.data.shoppingCartData[0])
-                    console.log(res.data.msg);
-                } else {
-                    console.log(res.data.msg);
-                }
-            }
-            ).catch(err => {
-                return Promise.reject(err)
+            addShopping(this.$store.state.user.user.user_id, this.productID).then(res => {
+                this.$store.commit('unshiftShoppingCart', res.data.shoppingCartData[0])
             })
         }
 

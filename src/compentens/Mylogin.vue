@@ -16,9 +16,7 @@
     </el-dialog>
 </template>
 <script>
-import axios from 'axios';
-
-
+import { loginModel } from '../service/index'
 export default {
     data() {
         // 账号验证
@@ -78,21 +76,13 @@ export default {
             //  validate: 对整个表单校验方法
             this.$refs.ruleForm.validate(valid => {
                 if (valid) {
-                    axios({
-                        method: 'post',
-                        url: '/api/users/login',
-                        data: {
-                            userName: this.LoginUser.name,
-                            password: this.LoginUser.pass
-                        }
-                    }).then(res => {
-                        if (res.data.code = '001') {
+                    loginModel(this.LoginUser.name, this.LoginUser.pass).then(res => {
+                        if (res.data.code == '001') {
                             this.isLogin = false
                             // 登录信息存到本地
                             let user = JSON.stringify(res.data.user);
                             localStorage.setItem("user", user);
                             // 触发自定义事件将登录信息传送给父组件
-
                             this.$store.commit('setUser', res.data.user)
                         } else {
                             this.$refs.ruleForm.resetFields()
