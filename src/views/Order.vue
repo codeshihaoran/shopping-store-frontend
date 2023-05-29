@@ -81,7 +81,7 @@
 
 
 <script>
-import { GetMyOrder } from '../service/index'
+import { getMyOrder } from '../service/index'
 export default {
     data() {
         return {
@@ -90,7 +90,7 @@ export default {
         }
     },
     mounted() {
-        GetMyOrder(this.$store.state.user.user.user_id).then(res => {
+        getMyOrder(this.$store.state.user.user.user_id).then(res => {
             this.orders = res.data.orders
         })
     },

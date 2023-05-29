@@ -1,12 +1,12 @@
 import axios from "axios"
 
 // 首页轮播图接口
-export const GetHomeCarouselDate = () => axios({
+export const getHomeCarouselDate = () => axios({
     method: 'post',
     url: 'api/resources/carousel'
 })
 // 首页商品数据接口
-export const GetHomeShoppingDate = (api, Productcategory) => axios({
+export const getHomeShoppingDate = (api, Productcategory) => axios({
     method: 'post',
     url: api,
     data: {
@@ -14,12 +14,12 @@ export const GetHomeShoppingDate = (api, Productcategory) => axios({
     }
 })
 // 全部商品列表页数据
-export const GetAllCategoryList = () => axios({
+export const getAllCategoryList = () => axios({
     method: "post",
     url: "/api/product/getCategory"
 })
 // 获取全部商品或者列表商品数据
-export const GetSomeData = (api, categoryID, currentPage, pageSize) => axios({
+export const getSomeData = (api, categoryID, currentPage, pageSize) => axios({
     method: 'post',
     url: api,
     data: {
@@ -29,7 +29,7 @@ export const GetSomeData = (api, categoryID, currentPage, pageSize) => axios({
     }
 })
 // 商品信息数据
-export const GetDetailsInfo = (productID) => axios({
+export const getDetailsInfo = (productID) => axios({
     method: 'post',
     url: '/api/product/getDetails',
     data: {
@@ -37,7 +37,7 @@ export const GetDetailsInfo = (productID) => axios({
     }
 })
 // 商品照片数据
-export const GetDetailsPictureInfo = (productID) => axios({
+export const getDetailsPictureInfo = (productID) => axios({
     method: 'post',
     url: '/api/product/getDetailsPicture',
     data: {
@@ -45,7 +45,7 @@ export const GetDetailsPictureInfo = (productID) => axios({
     }
 })
 // 添加购物车接口
-export const GetAddShopping = (user_id, product_id) => axios({
+export const addShopping = (user_id, product_id) => axios({
     method: 'post',
     url: '/api/user/shoppingCart/addShoppingCart',
     data: {
@@ -54,7 +54,7 @@ export const GetAddShopping = (user_id, product_id) => axios({
     }
 })
 // 添加我的收藏接口
-export const GetAddcollect = (product_id, user_id) => axios({
+export const addCollect = (product_id, user_id) => axios({
     method: 'post',
     url: '/api/user/collect/addCollect',
     data: {
@@ -63,7 +63,7 @@ export const GetAddcollect = (product_id, user_id) => axios({
     }
 })
 // 我的收藏接口
-export const GetAllCollect = (user_id) => axios({
+export const getCollect = (user_id) => axios({
     method: "post",
     url: "/api/user/collect/getCollect",
     data: {
@@ -71,7 +71,7 @@ export const GetAllCollect = (user_id) => axios({
     }
 })
 // 我的添加订单接口
-export const GetAddMyOrder = (user_id, products) => axios({
+export const addMyOrder = (user_id, products) => axios({
     method: 'post',
     url: '/api/user/order/addOrder',
     data: {
@@ -80,7 +80,7 @@ export const GetAddMyOrder = (user_id, products) => axios({
     }
 })
 // 我的订单接口
-export const GetMyOrder = (user_id) => axios({
+export const getMyOrder = (user_id) => axios({
     method: 'post',
     url: '/api/user/order/getOrder',
     data: {
@@ -88,7 +88,7 @@ export const GetMyOrder = (user_id) => axios({
     }
 })
 // 购物车接口
-export const GetMyShopping = (product_id, user_id) => axios({
+export const getMyShopping = (product_id, user_id) => axios({
     method: 'post',
     url: '/api/user/shoppingCart/deleteShoppingCart',
     data: {
@@ -97,7 +97,7 @@ export const GetMyShopping = (product_id, user_id) => axios({
     }
 })
 // 监听购物车更新
-export const GetMyShoppingCart = (user_id) => axios({
+export const updateMyShoppingCart = (user_id) => axios({
     method: 'post',
     url: '/api/user/shoppingCart/getShoppingCart',
     data: {
@@ -105,7 +105,7 @@ export const GetMyShoppingCart = (user_id) => axios({
     }
 })
 // 登录接口
-export const GetLoginModel = (userName, password) => axios({
+export const getLoginModel = (userName, password) => axios({
     method: 'post',
     url: '/api/users/login',
     data: {
@@ -114,7 +114,7 @@ export const GetLoginModel = (userName, password) => axios({
     }
 })
 // 注册接口
-export const GetRegisterModel = (userName, password) => axios({
+export const getRegisterModel = (userName, password) => axios({
     method: 'post',
     url: '/api/users/register',
     data: {
@@ -124,7 +124,7 @@ export const GetRegisterModel = (userName, password) => axios({
 })
 
 // 注册验证接口
-export const GetIsRegister = (userName) => axios({
+export const checkRegister = (userName) => axios({
     method: 'post',
     url: '/api/users/findUserName',
     data: {

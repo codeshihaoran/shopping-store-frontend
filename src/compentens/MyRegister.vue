@@ -25,8 +25,8 @@
     </el-dialog>
 </template>
 <script>
-import { GetRegisterModel } from '../service/index'
-import { GetIsRegister } from '../service/index'
+import { getRegisterModel } from '../service/index'
+import { checkRegister } from '../service/index'
 export default {
     name: 'MyRegister',
     props: ['register'],
@@ -40,7 +40,7 @@ export default {
             const userNameRule = /^[a-zA-Z][a-zA-Z0-9_]{4,15}$/;
             if (userNameRule.test(value)) {
                 // 判断数据库中是否存在该用户名
-                GetIsRegister(this.RegisterUser.name).then(res => {
+                checkRegister(this.RegisterUser.name).then(res => {
                     // code 为001是表示可以注册
                     if (res.data.code == '001') {
                         this.$refs.ruleForm.validateField("checkPass");
@@ -124,7 +124,7 @@ export default {
             this.$refs['ruleForm'].validate(valid => {
                 // 通过验证时开始注册
                 if (valid) {
-                    GetRegisterModel(this.RegisterUser.name, this.RegisterUser.pass).then(res => {
+                    getRegisterModel(this.RegisterUser.name, this.RegisterUser.pass).then(res => {
                         // code 为001时注册成功
                         // 注册成功关闭注册组件
                         this.isRegister = false

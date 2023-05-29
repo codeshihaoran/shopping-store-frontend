@@ -76,10 +76,10 @@
 </template>
 
 <script>
-import { GetDetailsPictureInfo } from '../service/index'
-import { GetDetailsInfo } from '../service/index'
-import { GetAddcollect } from '../service/index'
-import { GetAddShopping } from '../service/index';
+import { getDetailsPictureInfo } from '../service/index'
+import { getDetailsInfo } from '../service/index'
+import { addCollect } from '../service/index'
+import { addShopping } from '../service/index';
 export default {
     data() {
         return {
@@ -106,13 +106,13 @@ export default {
     methods: {
         // 获取商品详细信息数据
         getDetails() {
-            GetDetailsInfo(this.productID).then(res => {
+            getDetailsInfo(this.productID).then(res => {
                 this.productDetails = res.data.Product[0]
             })
         },
         // 获取商品图片数据
         getDetailsPicture() {
-            GetDetailsPictureInfo(this.productID).then(res => {
+            getDetailsPictureInfo(this.productID).then(res => {
                 this.productPicture = res.data.ProductPicture
             })
         },
@@ -122,7 +122,7 @@ export default {
                 this.$store.commit('setShowLogin', true)
                 return;
             }
-            GetAddcollect(this.productID, this.$store.state.user.user.user_id).then(res => {
+            addCollect(this.productID, this.$store.state.user.user.user_id).then(res => {
             })
         },
         addShoppingCart() {
@@ -130,7 +130,7 @@ export default {
                 this.$store.commit('setShowLogin', true)
                 return;
             }
-            GetAddShopping(this.$store.state.user.user.user_id, this.productID).then(res => {
+            addShopping(this.$store.state.user.user.user_id, this.productID).then(res => {
                 this.$store.commit('unshiftShoppingCart', res.data.shoppingCartData[0])
             })
         }
