@@ -22,7 +22,7 @@
     </div>
 </template>
 <script>
-import { getAllCollect } from '../service/index'
+import { GetAllCollect } from '../service/index'
 import MyList from '../compentens/MyList.vue';
 export default {
     data() {
@@ -34,7 +34,7 @@ export default {
         MyList
     },
     mounted() {
-        getAllCollect(this.$store.state.user.user.user_id).then(res => {
+        GetAllCollect(this.$store.state.user.user.user_id).then(res => {
             this.collectList = res.data.collectList;
         })
     },

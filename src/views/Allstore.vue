@@ -50,8 +50,8 @@
     </div>
 </template>
 <script>
-import { getSomeData } from '../service/index';
-import { allCategoryList } from '../service/index';
+import { GetSomeData } from '../service/index';
+import { GetAllCategoryList } from '../service/index';
 import MyList from '../compentens/MyList.vue';
 export default {
     data() {
@@ -67,7 +67,7 @@ export default {
     },
     mounted() {
         // 获取列表页数据
-        allCategoryList().then(res => {
+        GetAllCategoryList().then(res => {
             const val = {
                 category_id: 0,
                 category_name: "全部",
@@ -103,7 +103,7 @@ export default {
             const api = this.categoryID.length == 0
                 ? '/api/product/getAllProduct'
                 : '/api/product/getProductByCategory'
-            getSomeData(api, this.categoryID, this.currentPage, this.pageSize).then(res => {
+            GetSomeData(api, this.categoryID, this.currentPage, this.pageSize).then(res => {
                 this.product = res.data.Product
                 this.total = res.data.total
             })

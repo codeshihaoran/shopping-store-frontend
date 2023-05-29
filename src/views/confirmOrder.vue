@@ -110,7 +110,7 @@
 </template>
 
 <script>
-import { addMyOrder } from '../service/index';
+import { GetAddMyOrder } from '../service/index';
 export default {
     data() {
         return {
@@ -146,7 +146,7 @@ export default {
         addOrder() {
             // 获取加入我的订单的数据
             // 结算后要跳转到我的订单页面 并前将勾选的商品id删除
-            addMyOrder(this.$store.state.user.user.user_id, this.$store.getters.getCheckGoods).then(res => {
+            GetAddMyOrder(this.$store.state.user.user.user_id, this.$store.getters.getCheckGoods).then(res => {
                 let products = this.$store.getters.getCheckGoods
                 // this.$store.commit(' deleteStore', res.data.products.id)
                 for (let i = 0; i < products.length; i++) {

@@ -23,7 +23,7 @@ import TopBar from './compentens/TopBar.vue';
 import Header from './compentens/Header.vue';
 import Footer from './compentens/Footer.vue';
 import { mapGetters } from 'vuex'
-import { myShoppingCart } from '../src/service/index'
+import { GetMyShoppingCart } from '../src/service/index'
 export default {
     components: {
         TopBar,
@@ -47,7 +47,7 @@ export default {
             if (val == '') {
                 this.$store.commit('setShoppingCart', [])
             } else {
-                myShoppingCart(val.user_id).then(res => {
+                GetMyShoppingCart(val.user_id).then(res => {
                     this.$store.commit('setShoppingCart', res.data.shoppingCartData)
                 })
             }

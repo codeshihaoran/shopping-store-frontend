@@ -90,7 +90,7 @@
 </template>
 
 <script>
-import { myShopping } from '../service/index'
+import { GetMyShopping } from '../service/index'
 export default {
     data() {
         return {}
@@ -108,7 +108,7 @@ export default {
         },
         deleteNum(id, productID) {
             // 点击删除按钮删除某个商品
-            myShopping(productID, this.$store.state.user.user.user_id).then(res => {
+            GetMyShopping(productID, this.$store.state.user.user.user_id).then(res => {
                 this.$store.commit('deleteStore', id)
             })
 
