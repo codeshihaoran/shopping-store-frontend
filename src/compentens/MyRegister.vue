@@ -25,7 +25,7 @@
     </el-dialog>
 </template>
 <script>
-import { getRegisterModel } from '../service/index'
+import { registerUser } from '../service/index'
 import { checkRegister } from '../service/index'
 export default {
     name: 'MyRegister',
@@ -124,7 +124,7 @@ export default {
             this.$refs['ruleForm'].validate(valid => {
                 // 通过验证时开始注册
                 if (valid) {
-                    getRegisterModel(this.RegisterUser.name, this.RegisterUser.pass).then(res => {
+                    registerUser(this.RegisterUser.name, this.RegisterUser.pass).then(res => {
                         // code 为001时注册成功
                         // 注册成功关闭注册组件
                         this.isRegister = false

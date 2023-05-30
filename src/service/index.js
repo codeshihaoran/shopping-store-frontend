@@ -1,12 +1,12 @@
 import axios from "axios"
 
 // 首页轮播图接口
-export const getHomeCarouselDate = () => axios({
+export const getHomeCarouselData = () => axios({
     method: 'post',
     url: 'api/resources/carousel'
 })
 // 首页商品数据接口
-export const getHomeShoppingDate = (api, Productcategory) => axios({
+export const getHomeShoppingData = (api, Productcategory) => axios({
     method: 'post',
     url: api,
     data: {
@@ -105,7 +105,7 @@ export const updateMyShoppingCart = (user_id) => axios({
     }
 })
 // 登录接口
-export const getLoginModel = (userName, password) => axios({
+export const loginUser = (userName, password) => axios({
     method: 'post',
     url: '/api/users/login',
     data: {
@@ -114,7 +114,7 @@ export const getLoginModel = (userName, password) => axios({
     }
 })
 // 注册接口
-export const getRegisterModel = (userName, password) => axios({
+export const registerUser = (userName, password) => axios({
     method: 'post',
     url: '/api/users/register',
     data: {

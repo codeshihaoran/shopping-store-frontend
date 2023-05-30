@@ -102,8 +102,8 @@
     </div>
 </template>
 <script>
-import { getHomeShoppingDate } from '../service/index'
-import { getHomeCarouselDate } from '../service/index'
+import { getHomeShoppingData } from '../service/index'
+import { getHomeCarouselData } from '../service/index'
 import MyList from '../compentens/MyList.vue';
 export default {
     components: {
@@ -124,7 +124,7 @@ export default {
     },
     mounted() {
         // 获取轮播图数据
-        getHomeCarouselDate().then(res => {
+        getHomeCarouselData().then(res => {
             this.carousel = res.data.carousel
         })
         this.getPromo('手机', 'phoneList');//获取手机数据
@@ -154,7 +154,7 @@ export default {
         // 获取各类商品数据时使用了一个封装的方法
         getPromo(Productcategory, val, api) {
             api = api != undefined ? api : '/api/product/getPromoProduct';
-            getHomeShoppingDate(api, Productcategory).then(res => {
+            getHomeShoppingData(api, Productcategory).then(res => {
                 this[val] = res.data.Product
             })
         }

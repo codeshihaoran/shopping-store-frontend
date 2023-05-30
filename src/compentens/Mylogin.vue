@@ -16,7 +16,7 @@
     </el-dialog>
 </template>
 <script>
-import { getLoginModel } from '../service/index'
+import { loginUser } from '../service/index'
 export default {
     data() {
         // 账号验证
@@ -76,7 +76,7 @@ export default {
             //  validate: 对整个表单校验方法
             this.$refs.ruleForm.validate(valid => {
                 if (valid) {
-                    getLoginModel(this.LoginUser.name, this.LoginUser.pass).then(res => {
+                    loginUser(this.LoginUser.name, this.LoginUser.pass).then(res => {
                         if (res.data.code == '001') {
                             this.isLogin = false
                             // 登录信息存到本地
