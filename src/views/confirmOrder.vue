@@ -110,8 +110,7 @@
 </template>
 
 <script>
-import axios from 'axios';
-
+import { addMyOrder } from '../service/index';
 export default {
     data() {
         return {
@@ -138,7 +137,6 @@ export default {
             ]
         }
     },
-    // TODO created=>mounted
     mounted() {
         if (this.$store.getters.getCheckNum < 1) {
             this.$router.push({ path: '/shoppingCart' })
@@ -148,25 +146,14 @@ export default {
         addOrder() {
             // 获取加入我的订单的数据
             // 结算后要跳转到我的订单页面 并前将勾选的商品id删除
-            axios({
-                method: 'post',
-                url: '/api/user/order/addOrder',
-                data: {
-                    user_id: this.$store.state.user.user.user_id,
-                    products: this.$store.getters.getCheckGoods
-                }
-            }).then(res => {
+            addMyOrder(this.$store.state.user.user.user_id, this.$store.getters.getCheckGoods).then(res => {
                 let products = this.$store.getters.getCheckGoods
-                if (res.data.code == '001') {
-                    // this.$store.commit(' deleteStore', res.data.products.id)
-                    for (let i = 0; i < products.length; i++) {
-                        const temp = products[i]
-                        this.$store.commit('deleteStore', temp.id)
-                    }
-                    this.$router.push({ path: '/order' })
+                // this.$store.commit(' deleteStore', res.data.products.id)
+                for (let i = 0; i < products.length; i++) {
+                    const temp = products[i]
+                    this.$store.commit('deleteStore', temp.id)
                 }
-            }).catch(err => {
-                return Promise.reject(err)
+                this.$router.push({ path: '/order' })
             })
         }
     }

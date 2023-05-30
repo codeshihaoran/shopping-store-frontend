@@ -23,7 +23,6 @@ export default {
         }
     },
     watch: {
-        // TODO watch 监听路由变化 
         $route: {
             handler(val) {
                 this.activeIndex = val.path

@@ -102,8 +102,9 @@
     </div>
 </template>
 <script>
+import { getHomeShoppingData } from '../service/index'
+import { getHomeCarouselData } from '../service/index'
 import MyList from '../compentens/MyList.vue';
-import axios from 'axios';
 export default {
     components: {
         MyList,
@@ -123,14 +124,9 @@ export default {
     },
     mounted() {
         // 获取轮播图数据
-        axios({
-            method: 'post',
-            url: 'api/resources/carousel'
-        }).then(res => {
+        getHomeCarouselData().then(res => {
             this.carousel = res.data.carousel
-        }).catch(err => {
-            return Promise.reject(err)
-        });
+        })
         this.getPromo('手机', 'phoneList');//获取手机数据
         this.getPromo('电视机', 'miTvList');//获取电视机数据
         this.getPromo('保护套', 'protectingShellList');
@@ -156,16 +152,11 @@ export default {
             this.homeType = ite
         },
         // 获取各类商品数据时使用了一个封装的方法
-        async getPromo(Productcategory, val, api) {
+        getPromo(Productcategory, val, api) {
             api = api != undefined ? api : '/api/product/getPromoProduct';
-            const res = await axios({
-                method: 'post',
-                url: api,
-                data: {
-                    categoryName: Productcategory
-                }
+            getHomeShoppingData(api, Productcategory).then(res => {
+                this[val] = res.data.Product
             })
-            this[val] = res.data.Product
         }
     }
 }

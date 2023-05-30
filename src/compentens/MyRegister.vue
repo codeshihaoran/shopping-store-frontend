@@ -25,7 +25,8 @@
     </el-dialog>
 </template>
 <script>
-import axios from 'axios';
+import { registerUser } from '../service/index'
+import { checkRegister } from '../service/index'
 export default {
     name: 'MyRegister',
     props: ['register'],
@@ -39,13 +40,7 @@ export default {
             const userNameRule = /^[a-zA-Z][a-zA-Z0-9_]{4,15}$/;
             if (userNameRule.test(value)) {
                 // 判断数据库中是否存在该用户名
-                axios({
-                    method: 'post',
-                    url: '/api/users/findUserName',
-                    data: {
-                        userName: this.RegisterUser.name
-                    }
-                }).then(res => {
+                checkRegister(this.RegisterUser.name).then(res => {
                     // code 为001是表示可以注册
                     if (res.data.code == '001') {
                         this.$refs.ruleForm.validateField("checkPass");
@@ -129,24 +124,11 @@ export default {
             this.$refs['ruleForm'].validate(valid => {
                 // 通过验证时开始注册
                 if (valid) {
-                    axios({
-                        method: 'post',
-                        url: '/api/users/register',
-                        data: {
-                            userName: this.RegisterUser.name,
-                            password: this.RegisterUser.pass,
-                        }
-                    }).then(res => {
+                    registerUser(this.RegisterUser.name, this.RegisterUser.pass).then(res => {
                         // code 为001时注册成功
-                        if (res.data.code == '001') {
-                            // 注册成功关闭注册组件
-                            this.isRegister = false
-                            // 弹出注册成功提示框
-
-                        } else {
-                            // 注册失败时
-
-                        }
+                        // 注册成功关闭注册组件
+                        this.isRegister = false
+                        // 弹出注册成功提示框
                     })
                 } else {
                     return false

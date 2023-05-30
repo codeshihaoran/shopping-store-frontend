@@ -81,7 +81,7 @@
 
 
 <script>
-import axios from 'axios';
+import { getMyOrder } from '../service/index'
 export default {
     data() {
         return {
@@ -90,16 +90,8 @@ export default {
         }
     },
     mounted() {
-        axios({
-            method: 'post',
-            url: '/api/user/order/getOrder',
-            data: {
-                user_id: this.$store.state.user.user.user_id
-            }
-        }).then(res => {
+        getMyOrder(this.$store.state.user.user.user_id).then(res => {
             this.orders = res.data.orders
-        }).catch(err => {
-            return Promise.reject(err)
         })
     },
     watch: {

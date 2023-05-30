@@ -21,10 +21,8 @@
         </div>
     </div>
 </template>
-
-
 <script>
-import axios from 'axios';
+import { getCollect } from '../service/index'
 import MyList from '../compentens/MyList.vue';
 export default {
     data() {
@@ -36,19 +34,9 @@ export default {
         MyList
     },
     mounted() {
-        axios({
-            method: "post",
-            url: "/api/user/collect/getCollect",
-            data: {
-                user_id: this.$store.state.user.user.user_id
-            }
-        }).then(res => {
-            if (res.data.code === "001") {
-                this.collectList = res.data.collectList;
-            }
-        }).catch(err => {
-            return Promise.reject(err);
-        });
+        getCollect(this.$store.state.user.user.user_id).then(res => {
+            this.collectList = res.data.collectList;
+        })
     },
 }
 </script>

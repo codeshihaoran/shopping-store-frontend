@@ -90,7 +90,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { getMyShopping } from '../service/index'
 export default {
     data() {
         return {}
@@ -108,21 +108,8 @@ export default {
         },
         deleteNum(id, productID) {
             // 点击删除按钮删除某个商品
-            axios({
-                method: 'post',
-                url: '/api/user/shoppingCart/deleteShoppingCart',
-                data: {
-                    product_id: productID,
-                    user_id: this.$store.state.user.user.user_id
-                }
-            }).then(res => {
-                if (res.data.code == '001') {
-                    this.$store.commit('deleteStore', id)
-                } else {
-                    console.log(res.data.msg);
-                }
-            }).catch(err => {
-                return Promise.reject(err)
+            getMyShopping(productID, this.$store.state.user.user.user_id).then(res => {
+                this.$store.commit('deleteStore', id)
             })
 
         },
