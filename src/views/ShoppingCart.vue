@@ -90,6 +90,7 @@
 </template>
 
 <script>
+import { ElMessage } from 'element-plus'
 import { getMyShopping } from '../service/index'
 export default {
     data() {
@@ -110,6 +111,11 @@ export default {
             // 点击删除按钮删除某个商品
             getMyShopping(productID, this.$store.state.user.user.user_id).then(res => {
                 this.$store.commit('deleteStore', id)
+                ElMessage({
+                    message: '成功, 你已成功将该商品删除.',
+                    type: 'success',
+                })
+
             })
 
         },

@@ -76,6 +76,7 @@
 </template>
 
 <script>
+import { ElMessage } from 'element-plus'
 import { getDetailsPictureInfo } from '../service/index'
 import { getDetailsInfo } from '../service/index'
 import { addCollect } from '../service/index'
@@ -123,6 +124,10 @@ export default {
                 return;
             }
             addCollect(this.productID, this.$store.state.user.user.user_id).then(res => {
+                ElMessage({
+                    message: '成功, 你已成功将该商品加入我的收藏.',
+                    type: 'success',
+                })
             })
         },
         addShoppingCart() {
@@ -132,6 +137,10 @@ export default {
             }
             addShopping(this.$store.state.user.user.user_id, this.productID).then(res => {
                 this.$store.commit('unshiftShoppingCart', res.data.shoppingCartData[0])
+                ElMessage({
+                    message: '成功, 你已成功将该商品加入我的购物车.',
+                    type: 'success',
+                })
             })
         }
 
