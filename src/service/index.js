@@ -45,7 +45,7 @@ export const getDetailsPictureInfo = (productID) => axios({
     }
 })
 // 添加购物车接口
-export const addShopping = (user_id, product_id) => axios({
+export const addMyShopping = (user_id, product_id) => axios({
     method: 'post',
     url: '/api/user/shoppingCart/addShoppingCart',
     data: {
@@ -54,7 +54,7 @@ export const addShopping = (user_id, product_id) => axios({
     }
 })
 // 添加我的收藏接口
-export const addCollect = (product_id, user_id) => axios({
+export const addMyCollect = (product_id, user_id) => axios({
     method: 'post',
     url: '/api/user/collect/addCollect',
     data: {

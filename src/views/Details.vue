@@ -79,8 +79,8 @@
 import { ElMessage } from 'element-plus'
 import { getDetailsPictureInfo } from '../service/index'
 import { getDetailsInfo } from '../service/index'
-import { addCollect } from '../service/index'
-import { addShopping } from '../service/index';
+import { addMyCollect } from '../service/index'
+import { addMyShopping } from '../service/index';
 export default {
     data() {
         return {
@@ -123,7 +123,7 @@ export default {
                 this.$store.commit('setShowLogin', true)
                 return;
             }
-            addCollect(this.productID, this.$store.state.user.user.user_id).then(res => {
+            addMyCollect(this.productID, this.$store.state.user.user.user_id).then(res => {
                 ElMessage({
                     message: '成功, 你已成功将该商品加入我的收藏.',
                     type: 'success',
@@ -135,7 +135,7 @@ export default {
                 this.$store.commit('setShowLogin', true)
                 return;
             }
-            addShopping(this.$store.state.user.user.user_id, this.productID).then(res => {
+            addSMyhopping(this.$store.state.user.user.user_id, this.productID).then(res => {
                 this.$store.commit('unshiftShoppingCart', res.data.shoppingCartData[0])
                 ElMessage({
                     message: '成功, 你已成功将该商品加入我的购物车.',
