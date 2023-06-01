@@ -70,12 +70,12 @@
                         <ul>
                             <li>
                                 <span class="title">商品总数：</span>
-                                <span class="value">{{ this.$store.getters.getCheckNum }}件</span>
+                                <span class="value">{{ this.$store.getters.getCheckProductsSum }}件</span>
                             </li>
                             <li>
 
                                 <span class="title">商品总价：</span>
-                                <span class="value">{{ this.$store.getters.getAllPrice }}元</span>
+                                <span class="value">{{ this.$store.getters.getCheckedProductsPriceSum }}元</span>
                             </li>
                             <li>
                                 <span class="title">活动优惠：</span>
@@ -89,7 +89,7 @@
                             </li>
                             <li class="last"><span class="title">应付总额：</span>
                                 <span class="value">
-                                    <span class="total-price">{{ this.$store.getters.getAllPrice }}</span>元
+                                    <span class="total-price">{{ this.$store.getters.getCheckedProductsPriceSum }}</span>元
                                 </span>
                             </li>
                         </ul>
@@ -151,7 +151,7 @@ export default {
                 // this.$store.commit(' deleteStore', res.data.products.id)
                 for (let i = 0; i < products.length; i++) {
                     const temp = products[i]
-                    this.$store.commit('deleteStore', temp.id)
+                    this.$store.commit('deleteProducts', temp.id)
                 }
                 this.$router.push({ path: '/order' })
             })
