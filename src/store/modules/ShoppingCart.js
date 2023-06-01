@@ -12,12 +12,10 @@ export default {
             return state.ShoppingCart
         },
         getSum(state) {
-            // 商品的总数
             let sum = 0
-            for (let i = 0; i < state.ShoppingCart.length; i++) {
-                let someNum = state.ShoppingCart[i]
-                sum = someNum.num + sum
-            }
+            state.ShoppingCart.map((item) => {
+                sum = sum + item.num
+            })
             return sum
         },
 
@@ -25,34 +23,32 @@ export default {
         getCheckGoods(state) {
             // 获取选中的商品
             let newArr = []
-            for (let i = 0; i < state.ShoppingCart.length; i++) {
-                const item = state.ShoppingCart[i]
+            state.ShoppingCart.map((item) => {
                 if (item.checkbox == true) {
                     newArr.push(item)
                 }
-            }
+            })
             return newArr
+
         },
         getAllPrice(state) {
             // 选中商品价格的总和
             let total = 0
-            for (let i = 0; i < state.ShoppingCart.length; i++) {
-                const item = state.ShoppingCart[i]
+            state.ShoppingCart.map((item) => {
                 if (item.checkbox == true) {
                     total = total + item.price * item.num
                 }
-            }
+            })
             return total
         },
         getCheckNum(state) {
             // 选中商品的数量
             let sum = 0;
-            for (let i = 0; i < state.ShoppingCart.length; i++) {
-                const item = state.ShoppingCart[i]
+            state.ShoppingCart.map((item) => {
                 if (item.checkbox == true) {
                     sum = sum + item.num
                 }
-            }
+            })
             return sum
         },
     },
@@ -64,6 +60,7 @@ export default {
                 const item = data[i]
                 item.checkbox = false
             }
+
         },
 
         unshiftShoppingCart(state, data) {
