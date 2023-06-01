@@ -135,7 +135,7 @@ export default {
                 this.$store.commit('setShowLogin', true)
                 return;
             }
-            addSMyhopping(this.$store.state.user.user.user_id, this.productID).then(res => {
+            addMyShopping(this.$store.state.user.user.user_id, this.productID).then(res => {
                 this.$store.commit('unshiftShoppingCart', res.data.shoppingCartData[0])
                 ElMessage({
                     message: '成功, 你已成功将该商品加入我的购物车.',
