@@ -11,8 +11,8 @@
             </div>
         </div>
         <!-- 订单页面头部结束 -->
-
-
+        <OrderItem @sendOrder="receiveOrder"></OrderItem>
+        <OrderItem @sendAllsum="receiveAllSum"></OrderItem>
         <!-- 主内容区域 -->
         <!-- 有订单信息时 -->
         <div class="order-main" v-if="orders.length > 0">
@@ -53,20 +53,19 @@
                     <div class="last-left">
                         <span class="order-total">
                             共
-                            <span class="order-total-num">{{ allsum[index].allnum }}</span> 件商品
+                            <span class="order-total-num">{{ allsum[index].totalnum }}</span> 件商品
                         </span>
                     </div>
                     <div class="last-right">
                         <span>
                             <span class="total-price-title">合计：</span>
-                            <span class="total-price">{{ allsum[index].allprice }}元</span>
+                            <span class="total-price">{{ allsum[index].totalprice }}元</span>
                         </span>
                     </div>
                 </div>
             </div>
         </div>
         <!-- 订单信息结束 -->
-
         <!-- 无订单信息时 -->
         <div class="order-empty" v-else>
             <div class="empty">
@@ -81,34 +80,23 @@
 
 
 <script>
-import { getMyOrder } from '../service/index'
+import OrderItem from '../compentens/OrderItem.vue'
 export default {
+    components: {
+        OrderItem,
+    },
     data() {
         return {
             orders: [],
-            allsum: []
+            allsum: [],
         }
     },
-    mounted() {
-        getMyOrder(this.$store.state.user.user.user_id).then(res => {
-            this.orders = res.data.orders
-        })
-    },
-    watch: {
-        orders: function (val) {
-            let allsum = []
-            for (let i = 0; i < val.length; i++) {
-                const firstArr = val[i]
-                let allnum = 0
-                let allprice = 0
-                for (let j = 0; j < firstArr.length; j++) {
-                    const temp = firstArr[j]
-                    allnum = allnum + temp.product_num
-                    allprice = allprice + temp.product_num * temp.product_price
-                }
-                allsum.push({ allnum, allprice })
-            }
-            this.allsum = allsum
+    methods: {
+        receiveOrder(val) {
+            this.orders = val
+        },
+        receiveAllSum(val) {
+            this.allsum = val
         }
     }
 }
