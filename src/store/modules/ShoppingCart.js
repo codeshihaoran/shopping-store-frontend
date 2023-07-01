@@ -11,44 +11,44 @@ export default {
             // 获取购物车状态
             return state.ShoppingCart
         },
-        getSum(state) {
+        getAllProductsSum(state) {
             // reduce 求和
-            let sum = state.ShoppingCart.reduce((result, item) => {
+            const allProductsSum = state.ShoppingCart.reduce((result, item) => {
                 result = result + item.num
                 return result
             }, 0)
-            return sum
+            return allProductsSum
         },
-        getCheckGoods(state) {
+        getCheckedProducts(state) {
             // filter 过滤
-            let newArr = state.ShoppingCart.filter((item) => {
+            const checkedProducts = state.ShoppingCart.filter((item) => {
                 return item.checkbox == true
             })
-            return newArr
+            return checkedProducts
         },
         getCheckedProductsPriceSum(state) {
             // 过滤
-            let newArr = state.ShoppingCart.filter((item) => {
+            const checkedProducts = state.ShoppingCart.filter((item) => {
                 return item.checkbox == true
             })
             // 求和
-            let sum = newArr.reduce((result, item) => {
+            const checkedProductsPriceSum = checkedProducts.reduce((result, item) => {
                 result = result + item.num * item.price
                 return result
             }, 0)
-            return sum
+            return checkedProductsPriceSum
         },
-        getCheckProductsSum(state) {
+        getCheckedProductsSum(state) {
             // 过滤
-            let newArr = state.ShoppingCart.filter((item) => {
+            const checkedProducts = state.ShoppingCart.filter((item) => {
                 return item.checkbox == true
             })
             // 求和
-            let sum = newArr.reduce((result, item) => {
+            const checkedProductsSum = checkedProducts.reduce((result, item) => {
                 result = item.num + result;
                 return result
             }, 0)
-            return sum
+            return checkedProductsSum
         },
     },
     mutations: {

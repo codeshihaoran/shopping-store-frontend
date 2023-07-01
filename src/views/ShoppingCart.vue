@@ -59,8 +59,8 @@
                     <span class="sep">|</span>
                     <span class="cart-total">
                         共
-                        <span class="cart-total-num">{{ this.$store.getters.getSum }}</span> 件商品，已选择
-                        <span class="cart-total-num">{{ this.$store.getters.getCheckProductsSum }}</span> 件
+                        <span class="cart-total-num">{{ this.$store.getters.getAllProductsSum }}</span> 件商品，已选择
+                        <span class="cart-total-num">{{ this.$store.getters.getCheckedProductsSum }}</span> 件
                     </span>
                 </div>
                 <div class="cart-bar-right">
@@ -69,8 +69,9 @@
                         <span class="total-price">{{ this.$store.getters.getCheckedProductsPriceSum }}元</span>
                     </span>
                     <!-- 当有商品时 此按钮才能被点击 -->
-                    <router-link :to="this.$store.getters.getCheckProductsSum > 0 ? '/confirmOrder' : ''">
-                        <div :class="this.$store.getters.getCheckProductsSum > 0 ? 'btn-primary' : 'btn-primary-disabled'">
+                    <router-link :to="this.$store.getters.getCheckedProductsSum > 0 ? '/confirmOrder' : ''">
+                        <div
+                            :class="this.$store.getters.getCheckedProductsSum > 0 ? 'btn-primary' : 'btn-primary-disabled'">
                             去结算</div>
                     </router-link>
                 </div>
