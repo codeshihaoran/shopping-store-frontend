@@ -1,29 +1,24 @@
-# first-vue
+# store-shopping
 
-This template should help get you started developing with Vue 3 in Vite.
+基于vue开发的一个购物商城项目
 
-## Recommended IDE Setup
+## 项目背景
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+在大一期间学习了vue和一些工具的开发，想通过做项目去锻炼个人的动手能力。
+于是在大一下学期 去开发了一个小米购物商城的项目，期间学习了git的基本使用方式。
+通过git不断提交优化后的项目。
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
+## 项目安装
 
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+## 项目运行
 
 ```sh
 npm run dev
 ```
 
-### Compile and Minify for Production
+## 项目功能
 
-```sh
-npm run build
-```
