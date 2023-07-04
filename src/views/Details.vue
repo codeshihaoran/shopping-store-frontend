@@ -84,22 +84,17 @@ import { addMyShopping } from '../service/index';
 export default {
     data() {
         return {
-            productID: '',// 商品传递的ID
             productDetails: '',// 商品详细信息数据
             productPicture: '',// 商品图片数据
         }
     },
     mounted() {
-        // 利用路由获取商品id
-        // this.productID
-        if (this.$route.query.productID != undefined) {
-            this.productID = this.$route.query.productID
-        }
-
+        this.getDetails(this.$route.query.productID)
+        this.getDetailsPicture(this.$route.query.productID)
     },
     watch: {
         // 监听商品id
-        productID: function (val) {
+        '$route.query.productID': function (val) {
             this.getDetails(val)
             this.getDetailsPicture(val)
         }
@@ -107,13 +102,13 @@ export default {
     methods: {
         // 获取商品详细信息数据
         getDetails() {
-            getDetailsInfo(this.productID).then(res => {
+            getDetailsInfo(this.$route.query.productID).then(res => {
                 this.productDetails = res.data.Product[0]
             })
         },
         // 获取商品图片数据
         getDetailsPicture() {
-            getDetailsPictureInfo(this.productID).then(res => {
+            getDetailsPictureInfo(this.$route.query.productID).then(res => {
                 this.productPicture = res.data.ProductPicture
             })
         },
@@ -123,7 +118,7 @@ export default {
                 this.$store.commit('setShowLogin', true)
                 return;
             }
-            addMyCollect(this.productID, this.$store.state.user.user.user_id).then(res => {
+            addMyCollect(this.$route.query.productID, this.$store.state.user.user.user_id).then(res => {
                 ElMessage({
                     message: '成功, 你已成功将该商品加入我的收藏.',
                     type: 'success',
@@ -135,7 +130,7 @@ export default {
                 this.$store.commit('setShowLogin', true)
                 return;
             }
-            addMyShopping(this.$store.state.user.user.user_id, this.productID).then(res => {
+            addMyShopping(this.$store.state.user.user.user_id, this.$route.query.productID).then(res => {
                 this.$store.commit('unshiftShoppingCart', res.data.shoppingCartData[0])
                 ElMessage({
                     message: '成功, 你已成功将该商品加入我的购物车.',
