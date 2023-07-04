@@ -59,18 +59,20 @@
                     <span class="sep">|</span>
                     <span class="cart-total">
                         共
-                        <span class="cart-total-num">{{ this.$store.getters.getSum }}</span> 件商品，已选择
-                        <span class="cart-total-num">{{ this.$store.getters.getCheckNum }}</span> 件
+                        <span class="cart-total-num">{{ this.$store.getters.getAllProductsSum }}</span> 件商品，已选择
+                        <span class="cart-total-num">{{ this.$store.getters.getCheckedProductsSum }}</span> 件
                     </span>
                 </div>
                 <div class="cart-bar-right">
                     <span>
                         <span class="total-price-title">合计：</span>
-                        <span class="total-price">{{ this.$store.getters.getAllPrice }}元</span>
+                        <span class="total-price">{{ this.$store.getters.getCheckedProductsPriceSum }}元</span>
                     </span>
                     <!-- 当有商品时 此按钮才能被点击 -->
-                    <router-link :to="this.$store.getters.getCheckNum > 0 ? '/confirmOrder' : ''">
-                        <div :class="this.$store.getters.getCheckNum > 0 ? 'btn-primary' : 'btn-primary-disabled'">去结算</div>
+                    <router-link :to="this.$store.getters.getCheckedProductsSum > 0 ? '/confirmOrder' : ''">
+                        <div
+                            :class="this.$store.getters.getCheckedProductsSum > 0 ? 'btn-primary' : 'btn-primary-disabled'">
+                            去结算</div>
                     </router-link>
                 </div>
             </div>
@@ -110,7 +112,7 @@ export default {
         deleteNum(id, productID) {
             // 点击删除按钮删除某个商品
             getMyShopping(productID, this.$store.state.user.user.user_id).then(res => {
-                this.$store.commit('deleteStore', id)
+                this.$store.commit('deleteProducts', id)
                 ElMessage({
                     message: '成功, 你已成功将该商品删除.',
                     type: 'success',
