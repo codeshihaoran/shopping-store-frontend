@@ -7,12 +7,12 @@ const router = createRouter({
     {
       path: '/',
       name: 'Home',
-      component: () => import('../views/Home.vue')
+      component: () => import('../views/my-home.vue')
     },
     {
       path: '/allstore',
       name: 'Allstore',
-      component: () => import('../views/Allstore.vue')
+      component: () => import('../views/all-product.vue')
     },
     {
       path: '/about',
@@ -20,22 +20,22 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/About.vue')
+      component: () => import('../views/about-project.vue')
     },
     {
       path: '/error',
       name: 'Error',
-      component: () => import('../compentens/Error.vue')
+      component: () => import('../compentens/error-page.vue')
     },
     {
       path: '/allstore/details',
       name: 'Details',
-      component: () => import('../views/Details.vue')
+      component: () => import('../views/product-detail.vue')
     },
     {
       path: '/collect',
       name: 'Collect',
-      component: () => import('../views/Collect.vue'),
+      component: () => import('../views/collect-product.vue'),
       meta: {
         requireAuth: true
       }
@@ -43,7 +43,7 @@ const router = createRouter({
     {
       path: '/order',
       name: 'Order',
-      component: () => import('../views/Order.vue'),
+      component: () => import('../views/my-order.vue'),
       meta: {
         requireAuth: true
       }
@@ -51,7 +51,7 @@ const router = createRouter({
     {
       path: '/shoppingCart',
       name: 'ShoopingCart',
-      component: () => import('../views/ShoppingCart.vue'),
+      component: () => import('../views/Shopping-cart.vue'),
       meta: {
         requireAuth: true
       }
@@ -59,7 +59,7 @@ const router = createRouter({
     {
       path: '/confirmOrder',
       name: 'ConfirmOrder',
-      component: () => import('../views/confirmOrder.vue'),
+      component: () => import('../views/confirm-order.vue'),
       meta: {
         requireAuth: true
       }

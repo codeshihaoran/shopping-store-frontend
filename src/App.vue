@@ -19,9 +19,9 @@
     </el-container>
 </template>
 <script>
-import TopBar from './compentens/TopBar.vue';
-import Header from './compentens/Header.vue';
-import Footer from './compentens/Footer.vue';
+import TopBar from './compentens/app-topbar.vue';
+import Header from './compentens/app-header.vue';
+import Footer from './compentens/app-footer.vue';
 import { mapGetters } from 'vuex'
 import { updateMyShoppingCart } from '../src/service/index'
 export default {
@@ -29,14 +29,6 @@ export default {
         TopBar,
         Header,
         Footer,
-    },
-    mounted() {
-        // 在页面刷新时保留用户登录信息
-        // 获取浏览器localStorage 判断用户是否登录
-        if (localStorage.getItem('user')) {
-            // 如果用户已经登录 将状态返回给user
-            this.$store.commit('setUser', JSON.parse(localStorage.getItem("user")))
-        }
     },
     computed: {
         ...mapGetters(['getUser'])
@@ -53,6 +45,16 @@ export default {
             }
         },
     },
+    mounted() {
+        // 在页面刷新时保留用户登录信息
+        // 获取浏览器localStorage 判断用户是否登录
+        if (localStorage.getItem('user')) {
+            // 如果用户已经登录 将状态返回给user
+            this.$store.commit('setUser', JSON.parse(localStorage.getItem("user")))
+        }
+    },
+
+
 
 }
 </script>

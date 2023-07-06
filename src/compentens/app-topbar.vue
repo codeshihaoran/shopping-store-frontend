@@ -43,18 +43,18 @@
     </div>
 </template>
 <script>
-import MyRegister from './MyRegister.vue'
-import Mylogin from './Mylogin.vue'
+import MyRegister from './register-model.vue'
+import Mylogin from './login-model.vue'
 export default {
+    components: {
+        MyRegister,
+        Mylogin,
+    },
     data() {
         return {
             visible: false,// 登录后点击是否退出登录
             register: false,// 注册对话框是否显示
         }
-    },
-    components: {
-        MyRegister,
-        Mylogin,
     },
     methods: {
         getLogin() {

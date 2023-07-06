@@ -15,8 +15,8 @@
 
         <!-- 主内容区域 -->
         <!-- 有订单信息时 -->
-        <div class="order-main" v-if="orders.length > 0">
-            <div class="main" v-for="(item, index) in orders" :key="index">
+        <div v-if="orders.length > 0" class="order-main">
+            <div v-for="(item, index) in orders" :key="index" class="main">
                 <ul>
                     <li class="info">
                         <div class="order-id">
@@ -33,7 +33,7 @@
                         <div class="pro-num">数量</div>
                         <div class="pro-total">小计</div>
                     </li>
-                    <li class="product-list" v-for="(product, i) in item" :key="i">
+                    <li v-for="(product, i) in item" :key="i" class="product-list">
                         <div class="pro-img">
                             <router-link :to="{ path: '/allstore/details', query: { productID: product.product_id } }">
                                 <img :src="/api/ + product.product_picture" alt="">
@@ -68,7 +68,7 @@
         <!-- 订单信息结束 -->
 
         <!-- 无订单信息时 -->
-        <div class="order-empty" v-else>
+        <div v-else class="order-empty">
             <div class="empty">
                 <h2>您的订单还是空的!</h2>
                 <p>快去购物吧</p>
@@ -89,11 +89,6 @@ export default {
             allsum: []
         }
     },
-    mounted() {
-        getMyOrder(this.$store.state.user.user.user_id).then(res => {
-            this.orders = res.data.orders
-        })
-    },
     watch: {
         orders: function (val) {
             let allsum = []
@@ -110,6 +105,11 @@ export default {
             }
             this.allsum = allsum
         }
+    },
+    mounted() {
+        getMyOrder(this.$store.state.user.user.user_id).then(res => {
+            this.orders = res.data.orders
+        })
     }
 }
 </script>

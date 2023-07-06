@@ -1,13 +1,13 @@
 <!-- 项目登录组件 -->
 <template>
-    <el-dialog title="登录" width="300px" center v-model="isLogin">
-        <el-form :model="LoginUser" :rules="rules" status-icon ref="ruleForm" class="demo-ruleForm">
+    <el-dialog v-model="isLogin" title="登录" width="300px" center>
+        <el-form ref="ruleForm" :model="LoginUser" :rules="rules" status-icon class="demo-ruleForm">
             <el-form-item prop="name">
-                <el-input prefix-icon="el-icon-user-solid" placeholder="请输入账号" v-model="LoginUser.name"></el-input>
+                <el-input v-model="LoginUser.name" prefix-icon="el-icon-user-solid" placeholder="请输入账号"></el-input>
             </el-form-item>
             <el-form-item prop="pass">
-                <el-input prefix-icon="el-icon-view" type="password" placeholder="请输入密码"
-                    v-model="LoginUser.pass"></el-input>
+                <el-input v-model="LoginUser.pass" prefix-icon="el-icon-view" type="password"
+                    placeholder="请输入密码"></el-input>
             </el-form-item>
             <el-form-item>
                 <el-button size="medium" type="primary" style="width:100%;" class="btn" @click="Login">登录</el-button>

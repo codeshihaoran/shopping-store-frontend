@@ -10,7 +10,7 @@
             </div>
         </div>
         <!-- 购物车由内容 -->
-        <div class="content" v-if="this.$store.getters.getShoppingCart.length > 0">
+        <div v-if="this.$store.getters.getShoppingCart.length > 0" class="content">
             <ul>
                 <!-- 购物车表头 -->
                 <li class="header">
@@ -25,7 +25,7 @@
                     <div class="pro-total">小计</div>
                     <div class="pro-action">操作</div>
                 </li>
-                <li class="product-list" v-for="(item, index) in this.$store.getters.getShoppingCart" :key="item.id">
+                <li v-for="item in this.$store.getters.getShoppingCart" :key="item.id" class="product-list">
                     <div class="pro-check">
                         <el-checkbox v-model="item.checkbox"
                             @change="value => { this.$store.commit('updateCartItemcheckbox', { id: item.id, checkbox: value }) }"></el-checkbox>
@@ -109,7 +109,7 @@ export default {
         },
         deleteNum(id, productID) {
             // 点击删除按钮删除某个商品
-            getMyShopping(productID, this.$store.state.user.user.user_id).then(res => {
+            getMyShopping(productID, this.$store.state.user.user.user_id).then(() => {
                 this.$store.commit('deleteStore', id)
                 ElMessage({
                     message: '成功, 你已成功将该商品删除.',
