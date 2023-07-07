@@ -6,7 +6,15 @@ export const getHomeCarouselData = () => axios({
     url: 'api/resources/carousel'
 })
 // 首页商品数据接口
-export const getHomeShoppingData = (api, Productcategory) => axios({
+export const getHomePromoData = (Productcategory) => axios({
+    method: 'post',
+    url: '/api/product/getPromoProduct',
+    data: {
+        categoryName: Productcategory
+    }
+})
+// 首页热门商品数据接口
+export const getHomeHotData = (Productcategory, api) => axios({
     method: 'post',
     url: api,
     data: {

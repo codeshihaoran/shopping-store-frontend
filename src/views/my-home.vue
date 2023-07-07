@@ -26,7 +26,7 @@
                             </router-link>
                         </div>
                         <div class="list">
-                            <MyList :list="phoneList"></MyList>
+                            <productList :list="phoneList"></productList>
                         </div>
                     </div>
                 </div>
@@ -38,8 +38,8 @@
                             家电
                         </div>
                         <div class="more">
-                            <el-button type="text" @click="change(1)">热门</el-button>
-                            <el-button type="text" @click="change(2)">电视影视</el-button>
+                            <el-button type="text" @click="changeHomeAppliances(1)">热门</el-button>
+                            <el-button type="text" @click="changeHomeAppliances(2)">电视影视</el-button>
                         </div>
                     </div>
                     <div class="box-bd">
@@ -54,11 +54,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div v-if="homeType === 1" class="list">
-                            <MyList :list="applianceList"></MyList>
+                        <div v-if="chosenHomeAppliancesList === 1" class="list">
+                            <productList :list="applianceList"></productList>
                         </div>
                         <div v-else class="list">
-                            <MyList :list="miTvList"></MyList>
+                            <productList :list="miTvList"></productList>
                         </div>
                     </div>
                     <!-- 家电展示区域完成 -->
@@ -68,9 +68,9 @@
                     <div class="box-hd">
                         <div class="title">配件</div>
                         <div id="more" class="more">
-                            <el-button type="text" @click="add(1)">热门</el-button>
-                            <el-button type="text" @click="add(2)">保护套</el-button>
-                            <el-button type="text" @click="add(3)">充电器</el-button>
+                            <el-button type="text" @click="changeAccessories(1)">热门</el-button>
+                            <el-button type="text" @click="changeAccessories(2)">保护套</el-button>
+                            <el-button type="text" @click="changeAccessories(3)">充电器</el-button>
                         </div>
                     </div>
                     <div class="box-bd">
@@ -85,14 +85,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div v-if="peiJiType === 1" class="list">
-                            <MyList :list="chargerList"></MyList>
+                        <div v-if="chosenAccessoriesList === 1" class="list">
+                            <productList :list="chargerList"></productList>
                         </div>
-                        <div v-else-if="peiJiType === 2" class="list">
-                            <MyList :list="protectingShellList"></MyList>
+                        <div v-else-if="chosenAccessoriesList === 2" class="list">
+                            <productList :list="protectingShellList"></productList>
                         </div>
                         <div v-else class="list">
-                            <MyList :list="accessoryList"></MyList>
+                            <productList :list="accessoryList"></productList>
                         </div>
                     </div>
                 </div>
@@ -102,17 +102,18 @@
     </div>
 </template>
 <script>
-import { getHomeShoppingData } from '../service/index'
+import { getHomeHotData } from '../service/index'
+import { getHomePromoData } from '../service/index'
 import { getHomeCarouselData } from '../service/index'
-import MyList from '../compentens/product-list.vue';
+import productList from '../compentens/product-list.vue';
 export default {
     components: {
-        MyList,
+        productList,
     },
     data() {
         return {
-            homeType: 1,
-            peiJiType: 1,
+            chosenHomeAppliancesList: 1,
+            chosenAccessoriesList: 1,
             carousel: '',//轮播图数据
             phoneList: '',//手机数据
             miTvList: '',//小米电视数据
@@ -127,34 +128,38 @@ export default {
         getHomeCarouselData().then(res => {
             this.carousel = res.data.carousel
         })
-        this.getPromo('手机', 'phoneList');//获取手机数据
-        this.getPromo('电视机', 'miTvList');//获取电视机数据
-        this.getPromo('保护套', 'protectingShellList');
-        this.getPromo('充电器', 'chargerList');
-        this.getPromo(
+        this.getPromoProduct('手机', 'phoneList');//获取手机数据
+        this.getPromoProduct('电视机', 'miTvList');//获取电视机数据
+        this.getPromoProduct('保护套', 'protectingShellList');
+        this.getPromoProduct('充电器', 'chargerList');
+        this.getHotProduct(
             ["电视机", "空调", "洗衣机"],
             "applianceList",
             "/api/product/getHotProduct"
-        );//获取家电数据
-        this.getPromo(
+        );
+        this.getHotProduct(
             ["保护套", "保护膜", "充电器", "充电宝"],
             "accessoryList",
             "/api/product/getHotProduct"
         );
-        this.change(1)
+        this.changeHomeAppliances(1)
     },
     methods: {
-
-        add(icet) {
-            this.peiJiType = icet
+        changeAccessories(icet) {
+            this.chosenAccessoriesList = icet
         },
-        change(ite) {
-            this.homeType = ite
+        changeHomeAppliances(ite) {
+            this.chosenHomeAppliancesList = ite
         },
-        // 获取各类商品数据时使用了一个封装的方法
-        getPromo(Productcategory, val, api) {
-            api = api != undefined ? api : '/api/product/getPromoProduct';
-            getHomeShoppingData(api, Productcategory).then(res => {
+        // 获取普通商品
+        getPromoProduct(Productcategory, val) {
+            getHomePromoData(Productcategory).then(res => {
+                this[val] = res.data.Product
+            })
+        },
+        // 获取热门商品
+        getHotProduct(Productcategory, val, api) {
+            getHomeHotData(Productcategory, api).then(res => {
                 this[val] = res.data.Product
             })
         }
