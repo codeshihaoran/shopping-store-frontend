@@ -8,7 +8,7 @@
             </div>
         </div>
         <div class="content">
-            <div class="goods-list" v-if="collectList.length > 0">
+            <div v-if="collectList.length > 0" class="goods-list">
                 <MyList :list="collectList" :isDelete="true"></MyList>
             </div>
             <!-- 收藏列表为空的时候显示的内容 -->
@@ -23,15 +23,15 @@
 </template>
 <script>
 import { getCollect } from '../service/index'
-import MyList from '../compentens/MyList.vue';
+import MyList from '../compentens/product-list.vue';
 export default {
+    components: {
+        MyList
+    },
     data() {
         return {
             collectList: []
         };
-    },
-    components: {
-        MyList
     },
     mounted() {
         getCollect(this.$store.state.user.user.user_id).then(res => {

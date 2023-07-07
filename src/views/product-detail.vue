@@ -88,16 +88,16 @@ export default {
             productPicture: '',// 商品图片数据
         }
     },
-    mounted() {
-        this.getDetails(this.$route.query.productID)
-        this.getDetailsPicture(this.$route.query.productID)
-    },
     watch: {
         // 监听商品id
         '$route.query.productID': function (val) {
             this.getDetails(val)
             this.getDetailsPicture(val)
         }
+    },
+    mounted() {
+        this.getDetails(this.$route.query.productID)
+        this.getDetailsPicture(this.$route.query.productID)
     },
     methods: {
         // 获取商品详细信息数据
@@ -117,8 +117,9 @@ export default {
             if (!this.$store.state.user.user) {
                 this.$store.commit('setShowLogin', true)
                 return;
+
             }
-            addMyCollect(this.$route.query.productID, this.$store.state.user.user.user_id).then(res => {
+            addMyCollect(this.$route.query.productID, this.$store.state.user.user.user_id).then(() => {
                 ElMessage({
                     message: '成功, 你已成功将该商品加入我的收藏.',
                     type: 'success',

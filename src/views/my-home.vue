@@ -54,10 +54,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="list" v-if="homeType === 1">
+                        <div v-if="homeType === 1" class="list">
                             <MyList :list="applianceList"></MyList>
                         </div>
-                        <div class="list" v-else>
+                        <div v-else class="list">
                             <MyList :list="miTvList"></MyList>
                         </div>
                     </div>
@@ -67,7 +67,7 @@
                 <div class="accessory">
                     <div class="box-hd">
                         <div class="title">配件</div>
-                        <div class="more" id="more">
+                        <div id="more" class="more">
                             <el-button type="text" @click="add(1)">热门</el-button>
                             <el-button type="text" @click="add(2)">保护套</el-button>
                             <el-button type="text" @click="add(3)">充电器</el-button>
@@ -85,13 +85,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="list" v-if="peiJiType === 1">
+                        <div v-if="peiJiType === 1" class="list">
                             <MyList :list="chargerList"></MyList>
                         </div>
-                        <div class="list" v-else-if="peiJiType === 2">
+                        <div v-else-if="peiJiType === 2" class="list">
                             <MyList :list="protectingShellList"></MyList>
                         </div>
-                        <div class="list" v-else>
+                        <div v-else class="list">
                             <MyList :list="accessoryList"></MyList>
                         </div>
                     </div>
@@ -104,7 +104,7 @@
 <script>
 import { getHomeShoppingData } from '../service/index'
 import { getHomeCarouselData } from '../service/index'
-import MyList from '../compentens/MyList.vue';
+import MyList from '../compentens/product-list.vue';
 export default {
     components: {
         MyList,

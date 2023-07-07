@@ -5,21 +5,21 @@
 <!-- 注册成功时弹出注册成功框不显示 -->
 <template>
     <!-- 这里需要v-model来绑定isRegister的值 -->
-    <el-dialog title="注册" width="300px" center v-model="isRegister">
-        <el-form :model="RegisterUser" :rules="rules" status-icon ref="ruleForm" class="demo-ruleForm">
+    <el-dialog v-model="isRegister" title="注册" width="300px" center>
+        <el-form ref="ruleForm" :model="RegisterUser" :rules="rules" status-icon class="demo-ruleForm">
             <el-form-item prop="name">
-                <el-input prefix-icon="el-icon-user-solid" placeholder="请输入账号" v-model="RegisterUser.name"></el-input>
+                <el-input v-model="RegisterUser.name" prefix-icon="el-icon-user-solid" placeholder="请输入账号"></el-input>
             </el-form-item>
             <el-form-item prop="pass">
-                <el-input prefix-icon="el-icon-view" type="password" placeholder="请输入密码"
-                    v-model="RegisterUser.pass"></el-input>
+                <el-input v-model="RegisterUser.pass" prefix-icon="el-icon-view" type="password"
+                    placeholder="请输入密码"></el-input>
             </el-form-item>
             <el-form-item prop="confirmPass">
-                <el-input prefix-icon="el-icon-view" type="password" placeholder="请再次输入密码"
-                    v-model="RegisterUser.confirmPass"></el-input>
+                <el-input v-model="RegisterUser.confirmPass" prefix-icon="el-icon-view" type="password"
+                    placeholder="请再次输入密码"></el-input>
             </el-form-item>
             <el-form-item>
-                <el-button size="medium" type="primary" @click="Register" style="width:100%;" class="btn">注册</el-button>
+                <el-button size="medium" type="primary" style="width:100%;" class="btn" @click="Register">注册</el-button>
             </el-form-item>
         </el-form>
     </el-dialog>
@@ -124,7 +124,7 @@ export default {
             this.$refs['ruleForm'].validate(valid => {
                 // 通过验证时开始注册
                 if (valid) {
-                    registerUser(this.RegisterUser.name, this.RegisterUser.pass).then(res => {
+                    registerUser(this.RegisterUser.name, this.RegisterUser.pass).then(() => {
                         // code 为001时注册成功
                         // 注册成功关闭注册组件
                         this.isRegister = false

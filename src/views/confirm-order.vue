@@ -19,7 +19,8 @@
                 <div class="information">
                     <p class="address">收货地址</p>
                     <div class="box">
-                        <div class="three" :class="item.id == confirmAddress ? 'in-section' : ''" v-for="item in list">
+                        <div v-for="item in list" :key="item.id" class="three"
+                            :class="item.id == confirmAddress ? 'in-section' : ''">
                             <p class="address">{{ item.name }}</p>
                             <p class="num">{{ item.number }}</p>
                             <p class="num">{{ item.address }}</p>
@@ -100,7 +101,7 @@
             <div class="btn">
                 <div class="btnnn">
                     <router-link to="/shoppingCart" class="btn-base btn-return">返回购物车</router-link>
-                    <a href="javascript:;" @click="addOrder" class="btn-base btn-primary">结算</a>
+                    <a href="javascript:;" class="btn-base btn-primary" @click="addOrder">结算</a>
                 </div>
             </div>
         </div>
@@ -146,8 +147,8 @@ export default {
         addOrder() {
             // 获取加入我的订单的数据
             // 结算后要跳转到我的订单页面 并前将勾选的商品id删除
-            addMyOrder(this.$store.state.user.user.user_id, this.$store.getters.getCheckedProducts).then(res => {
-                let products = this.$store.getters.getCheckedProducts
+            addMyOrder(this.$store.state.user.user.user_id, this.$store.getters.getCheckGoods).then(() => {
+                let products = this.$store.getters.getCheckGoods
                 // this.$store.commit(' deleteStore', res.data.products.id)
                 for (let i = 0; i < products.length; i++) {
                     const temp = products[i]

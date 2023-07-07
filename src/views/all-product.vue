@@ -31,7 +31,7 @@
         <!-- 主要内容区域 -->
         <div class="main">
             <div class="list">
-                <MyList :list="product" v-if="product.length > 0"></MyList>
+                <MyList v-if="product.length > 0" :list="product"></MyList>
                 <div v-else class="none-product">
                     抱歉没有找到相关的商品，请看看其他的商品
                 </div>
@@ -52,8 +52,9 @@
 <script>
 import { getSomeData } from '../service/index';
 import { getAllCategoryList } from '../service/index';
-import MyList from '../compentens/MyList.vue';
+import MyList from '../compentens/product-list.vue';
 export default {
+    components: { MyList },
     data() {
         return {
             activeName: '0',//选项卡选定的tab
@@ -64,22 +65,6 @@ export default {
             currentPage: 1,//显示选中的分页
             pageSize: 15,//每个列表页定义最大数据
         };
-    },
-    mounted() {
-        // 获取列表页数据
-        getAllCategoryList().then(res => {
-            const val = {
-                category_id: 0,
-                category_name: "全部",
-            };
-            const cate = res.data.category;
-            cate.unshift(val);
-            this.categoryList = cate;
-        });
-        // 在created生命周期中将categoryID长度为0
-        // 然后调用getData函数获取全部商品数据 
-        this.categoryID.length == 0
-        this.getData()
     },
     watch: {
         // 监听分类标签 点击那个标签传过来的activeName的值 对应修改id的值 来显示相应的商品
@@ -96,6 +81,22 @@ export default {
             this.getData()
         },
 
+    },
+    mounted() {
+        // 获取列表页数据
+        getAllCategoryList().then(res => {
+            const val = {
+                category_id: 0,
+                category_name: "全部",
+            };
+            const cate = res.data.category;
+            cate.unshift(val);
+            this.categoryList = cate;
+        });
+        // 在created生命周期中将categoryID长度为0
+        // 然后调用getData函数获取全部商品数据 
+        this.categoryID.length == 0
+        this.getData()
     },
     methods: {
         // 获取全部商品数据或者列表页商品数据
@@ -116,8 +117,7 @@ export default {
             this.getData()
         }
 
-    },
-    components: { MyList }
+    }
 }
 </script>
 <style scoped>
