@@ -1,29 +1,75 @@
-# first-vue
+# store-shopping
 
-This template should help get you started developing with Vue 3 in Vite.
+基于`vue选项式API`开发的一个购物商城项目
 
-## Recommended IDE Setup
+## 技术栈
+前端基于：`Vue2`+`Vue-router`+`vuex`+`elementui`+`Axios`
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## 项目背景
 
-## Customize configuration
+### 项目前言
+在大一期间，我学习了`vue`和一些工具的开发，想通过做项目去锻炼个人的动手能力。
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+### 项目来源
+于是在大一下学期，学生模仿[小海同学](https://github.com/hai-27)搭建的[小米购物商城](https://github.com/hai-27/vue-store)项目，采用不同的方式和思路搭建本项目。
 
-## Project Setup
+感谢[原作者](https://github.com/hai-27)的贡献，在此项目中，不仅让学生提升了自己的动手能力，也学习了不少开发工具的使用。
+
+### 项目区别
++ 抽出了service层，将HTTP接口在service层中的代码定义自动生成，提高代码可维护性。
++ 对组件命名、接口命名、事件命名、变量命名风格进行优化，提高代码的可读性。
++ 拆分部分页面模板、样式、逻辑封装在components组件中，使代码更加整简规范。
++ 对页面逻辑代码的优化，减少代码的冗余。
++ 对`Vuex`中的代码扩展了更多的数组用法：数组遍历、数组求和、数组过滤、使代码更加贴合实际开发的项目
+
+## 安装依赖
 
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+## 项目运行
 
 ```sh
 npm run dev
 ```
 
-### Compile and Minify for Production
+## 功能特性
+### 注册
+注册页面同样基于`element-ui`中`dialog`弹出对话框效果实现，通过`Topbar.vue`中的`register`来控制注册框是否显示。
 
-```sh
-npm run build
-```
+在`Topbar.vue`组件设置的注册按钮，点击注册后会弹出注册框，基于`element-ui`表演校验方式对注册信息进行校验，
+
+### 登录
+登录页面基于`element-ui`中`dialog`弹出对话框效果实现，通过`Vuex`中的`showLogin`来控制登录框是否显示。
+
+在`Topbar.vue`组件设置的登录按钮，点击登录后会弹出登录框，基于`element-ui`表演校验方式对登录信息进行校验。
+
+通过`Vuex`中设置的`user`状态来获取当前用户信息，来展示不同的收藏、购物车、订单页面。
+
+## 项目简介
+### 首页
++ 轮播图展示推荐商品
++ 热门商品分类的展示
+### 全部商品页面
++ 全部商品展示
++ 商品分类查询
+### 关于我们页面
++ 项目内容介绍
++ 项目技术栈介绍
+### 商品详情页面
++ 商品详细信息展示
++ 商品可加购和加入收藏
+### 我的收藏页面
++ 我的收藏商品展示
++ 在商品详情页面可加入
+### 确认订单页面
++ 在购物车页面点击结算后进入
++ 选择相应的收货地址和电话确认购买
+### 我的订单页面
++ 用户购买的商品订单展示
++ 确认订单后即可生效
+### 购物车页面
++ 采用`Vuex`实现
++ 加购逻辑，全选/反全选逻辑，删除商品逻辑。
++ 商品数量，商品价格，商品总价结算通过`Vuex`实现。

@@ -11,61 +11,54 @@ export default {
             // 获取购物车状态
             return state.ShoppingCart
         },
-        getSum(state) {
-            // 商品的总数
-            let sum = 0
-            for (let i = 0; i < state.ShoppingCart.length; i++) {
-                let someNum = state.ShoppingCart[i]
-                sum = someNum.num + sum
-            }
-            return sum
+        getAllProductsSum(state) {
+            // reduce 求和
+            const allProductsSum = state.ShoppingCart.reduce((result, item) => {
+                result = result + item.num
+                return result
+            }, 0)
+            return allProductsSum
         },
-
-
-        getCheckGoods(state) {
-            // 获取选中的商品
-            let newArr = []
-            for (let i = 0; i < state.ShoppingCart.length; i++) {
-                const item = state.ShoppingCart[i]
-                if (item.checkbox == true) {
-                    newArr.push(item)
-                }
-            }
-            return newArr
+        getCheckedProducts(state) {
+            // filter 过滤
+            const checkedProducts = state.ShoppingCart.filter((item) => {
+                return item.checkbox == true
+            })
+            return checkedProducts
         },
-        getAllPrice(state) {
-            // 选中商品价格的总和
-            let total = 0
-            for (let i = 0; i < state.ShoppingCart.length; i++) {
-                const item = state.ShoppingCart[i]
-                if (item.checkbox == true) {
-                    total = total + item.price * item.num
-                }
-            }
-            return total
+        getCheckedProductsPriceSum(state) {
+            // 过滤
+            const checkedProducts = state.ShoppingCart.filter((item) => {
+                return item.checkbox == true
+            })
+            // 求和
+            const checkedProductsPriceSum = checkedProducts.reduce((result, item) => {
+                result = result + item.num * item.price
+                return result
+            }, 0)
+            return checkedProductsPriceSum
         },
-        getCheckNum(state) {
-            // 选中商品的数量
-            let sum = 0;
-            for (let i = 0; i < state.ShoppingCart.length; i++) {
-                const item = state.ShoppingCart[i]
-                if (item.checkbox == true) {
-                    sum = sum + item.num
-                }
-            }
-            return sum
+        getCheckedProductsSum(state) {
+            // 过滤
+            const checkedProducts = state.ShoppingCart.filter((item) => {
+                return item.checkbox == true
+            })
+            // 求和
+            const checkedProductsSum = checkedProducts.reduce((result, item) => {
+                result = item.num + result;
+                return result
+            }, 0)
+            return checkedProductsSum
         },
     },
     mutations: {
         setShoppingCart(state, data) {
             //设置购物车状态
             state.ShoppingCart = data
-            for (let i = 0; i < data.length; i++) {
-                const item = data[i]
+            data.forEach((item) => {
                 item.checkbox = false
-            }
+            })
         },
-
         unshiftShoppingCart(state, data) {
             // 添加购物车商品
             state.ShoppingCart.unshift(data)
@@ -73,39 +66,34 @@ export default {
         updateCartItemcheckbox(state, payload) {
             // payload是一个对象 payload包含一个id和checkbox
             // 单选按钮的实现 
-            for (let i = 0; i < state.ShoppingCart.length; i++) {
-                const item = state.ShoppingCart[i]
+            state.ShoppingCart.forEach((item) => {
                 if (item.id == payload.id) {
                     item.checkbox = payload.checkbox
                 }
-            }
+            })
             // 反全选按钮的实现
             let flag = true
-            for (let i = 0; i < state.ShoppingCart.length; i++) {
-                const item = state.ShoppingCart[i]
+            state.ShoppingCart.forEach((item) => {
                 if (item.checkbox == false) {
                     flag = false
                 }
-            }
+            })
             state.isAllcheck = flag
         },
         updateCartAllcheckbox(state, payload) {
-            // 
-            for (let i = 0; i < state.ShoppingCart.length; i++) {
-                const item = state.ShoppingCart[i]
+            // 全选按钮
+            state.ShoppingCart.forEach((item) => {
                 item.checkbox = payload.checkbox
-            }
+            })
             state.isAllcheck = payload.checkbox
         },
-
-        deleteStore(state, data) {
+        deleteProducts(state, data) {
             // 删除购物车商品
-            for (var i = 0; i < state.ShoppingCart.length; i++) {
-                let someStore = state.ShoppingCart[i]
-                if (someStore.id == data) {
-                    state.ShoppingCart.splice(i, 1)
+            state.ShoppingCart.forEach((item, index) => {
+                if (item.id == data) {
+                    state.ShoppingCart.splice(index, 1)
                 }
-            }
+            })
         },
 
     },
