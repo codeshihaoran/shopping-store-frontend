@@ -7,7 +7,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'Home',
-      component: () => import('../views/my-home.vue')
+      component: () => import('../views/product-home.vue')
     },
     {
       path: '/allstore',
@@ -43,7 +43,7 @@ const router = createRouter({
     {
       path: '/order',
       name: 'Order',
-      component: () => import('../views/my-order.vue'),
+      component: () => import('../views/order/order-list.vue'),
       meta: {
         requireAuth: true
       }
