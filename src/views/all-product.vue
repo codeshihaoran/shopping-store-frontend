@@ -105,7 +105,7 @@ export default {
                 ? '/api/product/getAllProduct'
                 : '/api/product/getProductByCategory'
             getSomeData(api, this.categoryID, this.currentPage, this.pageSize).then(res => {
-                this.product = res.data.Product
+                this.product = res.data.products
                 this.total = res.data.total
             })
         },

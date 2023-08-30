@@ -3,8 +3,8 @@
     <div class="myList">
         <ul>
             <li v-for="item in list" :key="item.product_id">
-                <router-link :to="{ path: '/allstore/details', query: { productID: item.product_id } }">
-                    <img :src="/api/ + item.product_picture" alt />
+                <router-link :to="{ path: '/details', query: { productID: item.product_id } }">
+                    <img :src="item.product_picture" alt />
                     <h2>{{ item.product_name }}</h2>
                     <h3>{{ item.product_title }}</h3>
                     <p>
@@ -24,9 +24,6 @@ export default {
     data() {
         return {}
     },
-    created() {
-    }
-
 }
 
 </script>

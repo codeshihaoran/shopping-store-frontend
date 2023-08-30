@@ -28,7 +28,7 @@ const router = createRouter({
       component: () => import('../compentens/error-page.vue')
     },
     {
-      path: '/allstore/details',
+      path: '/details',
       name: 'Details',
       component: () => import('../views/product-detail.vue')
     },

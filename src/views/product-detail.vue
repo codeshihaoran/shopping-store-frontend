@@ -20,8 +20,8 @@
             <!-- 轮播图 -->
             <div class="block">
                 <el-carousel height="560px">
-                    <el-carousel-item v-for="item in productPicture" :key="item">
-                        <img :src="/api/ + item.product_picture" alt="">
+                    <el-carousel-item v-for="item in productPicture" :key="item.id">
+                        <img :src="item.product_picture" :alt="item.intro">
                     </el-carousel-item>
                 </el-carousel>
 
@@ -85,7 +85,7 @@ export default {
     data() {
         return {
             productDetails: '',// 商品详细信息数据
-            productPicture: '',// 商品图片数据
+            productPicture: ''
         }
     },
     watch: {

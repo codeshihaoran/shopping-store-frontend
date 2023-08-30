@@ -7,7 +7,7 @@
             <div class="block">
                 <el-carousel height="460px">
                     <el-carousel-item v-for="item in carousel" :key="item.carousel_id">
-                        <img style="height:460px;" :src="/api/ + item.imgPath" :alt="item.describes" />
+                        <img style="height:460px;" :src="item.imgPath" :alt="item.describes" />
                     </el-carousel-item>
                 </el-carousel>
             </div>
@@ -22,7 +22,7 @@
                     <div class="box-bd">
                         <div class="promo-list">
                             <router-link to>
-                                <img style="height:615px" :src="/api/ + 'public/imgs/phone/phone.png'" />
+                                <img style="height:615px" :src="'public/imgs/phone/phone.png'" />
                             </router-link>
                         </div>
                         <div class="list">
@@ -46,11 +46,11 @@
                         <div class="promo-list">
                             <div class="images">
                                 <div class="images-1">
-                                    <img :src="/api/ + 'public/imgs/appliance/appliance-promo1.png'" alt="">
+                                    <img :src="'public/imgs/appliance/appliance-promo1.png'" alt="">
                                 </div>
 
                                 <div class="images-2">
-                                    <img :src="/api/ + 'public/imgs/appliance/appliance-promo2.png'" alt="">
+                                    <img :src="'public/imgs/appliance/appliance-promo2.png'" alt="">
                                 </div>
                             </div>
                         </div>
@@ -77,11 +77,11 @@
                         <div class="promo-list">
                             <div class="images">
                                 <div class="images-1">
-                                    <img :src="/api/ + 'public/imgs/accessory/accessory-promo1.png'" alt="">
+                                    <img :src="'public/imgs/accessory/accessory-promo1.png'" alt="">
                                 </div>
 
                                 <div class="images-2">
-                                    <img :src="/api/ + 'public/imgs/accessory/accessory-promo2.png'" alt="">
+                                    <img :src="'public/imgs/accessory/accessory-promo2.png'" alt="">
                                 </div>
                             </div>
                         </div>
@@ -126,6 +126,7 @@ export default {
         // 获取轮播图数据
         getHomeCarouselData().then(res => {
             this.carousel = res.data.carousel
+            console.log(this.carousel);
         })
         this.getPromo('手机', 'phoneList');//获取手机数据
         this.getPromo('电视机', 'miTvList');//获取电视机数据
@@ -144,7 +145,6 @@ export default {
         this.change(1)
     },
     methods: {
-
         add(icet) {
             this.peiJiType = icet
         },
@@ -155,7 +155,7 @@ export default {
         getPromo(Productcategory, val, api) {
             api = api != undefined ? api : '/api/product/getPromoProduct';
             getHomeShoppingData(api, Productcategory).then(res => {
-                this[val] = res.data.Product
+                this[val] = res.data.products
             })
         }
     }
