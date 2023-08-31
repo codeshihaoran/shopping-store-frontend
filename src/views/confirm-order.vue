@@ -37,7 +37,7 @@
                     <div class="list">
                         <ul>
                             <li v-for="item in this.$store.getters.getCheckedProducts" :key="item.id">
-                                <img :src="/api/ + item.productImg" alt="">
+                                <img :src="item.productImg" alt="">
                                 <span class="pro-name">{{ item.productName }}</span>
                                 <span class="pro-price">{{ item.price }}元 X {{ item.num }}</span>
                                 <span class="pro-status"></span>
@@ -145,10 +145,11 @@ export default {
     },
     methods: {
         addOrder() {
+            console.log('选中的商品：', this.$store.getters.getCheckedProducts);
             // 获取加入我的订单的数据
             // 结算后要跳转到我的订单页面 并前将勾选的商品id删除
-            addMyOrder(this.$store.state.user.user.user_id, this.$store.getters.getCheckGoods).then(() => {
-                let products = this.$store.getters.getCheckGoods
+            addMyOrder(this.$store.state.user.user.user_id, this.$store.getters.getCheckedProducts).then(() => {
+                let products = this.$store.getters.getCheckedProducts
                 // this.$store.commit(' deleteStore', res.data.products.id)
                 for (let i = 0; i < products.length; i++) {
                     const temp = products[i]

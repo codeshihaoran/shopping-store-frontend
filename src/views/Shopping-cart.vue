@@ -32,7 +32,7 @@
                     </div>
                     <div class="pro-img">
                         <router-link :to="{ path: '/allstore/details', query: { productID: item.productID } }">
-                            <img :src="/api/ + item.productImg" />
+                            <img :src="item.productImg" />
                         </router-link>
                     </div>
                     <div class="pro-name">

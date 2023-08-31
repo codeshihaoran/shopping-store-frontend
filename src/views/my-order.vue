@@ -35,12 +35,12 @@
                     </li>
                     <li v-for="(product, i) in item" :key="i" class="product-list">
                         <div class="pro-img">
-                            <router-link :to="{ path: '/allstore/details', query: { productID: product.product_id } }">
-                                <img :src="/api/ + product.product_picture" alt="">
+                            <router-link :to="{ path: '/details', query: { productID: product.product_id } }">
+                                <img :src="product.product_picture" alt="">
                             </router-link>
                         </div>
                         <div class="pro-name">
-                            <router-link :to="{ path: '/allstore/details', query: { productID: product.product_id } }">
+                            <router-link :to="{ path: '/details', query: { productID: product.product_id } }">
                                 {{ product.product_name }}
                             </router-link>
                         </div>
