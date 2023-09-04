@@ -34,7 +34,7 @@ export default {
         };
     },
     mounted() {
-        getCollect(this.$store.state.user.user.user_id).then(res => {
+        getCollect().then(res => {
             this.collectList = res.data.collectList;
         })
     },

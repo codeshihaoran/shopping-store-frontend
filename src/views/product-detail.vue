@@ -119,7 +119,7 @@ export default {
                 return;
 
             }
-            addMyCollect(this.$route.query.productID, this.$store.state.user.user.user_id).then(() => {
+            addMyCollect(this.$route.query.productID).then(() => {
                 ElMessage({
                     message: '成功, 你已成功将该商品加入我的收藏.',
                     type: 'success',
@@ -131,7 +131,7 @@ export default {
                 this.$store.commit('setShowLogin', true)
                 return;
             }
-            addMyShopping(this.$store.state.user.user.user_id, this.$route.query.productID).then(res => {
+            addMyShopping(this.$route.query.productID).then(res => {
                 this.$store.commit('unshiftShoppingCart', res.data.shoppingCartData[0])
                 ElMessage({
                     message: '成功, 你已成功将该商品加入我的购物车.',

@@ -39,7 +39,7 @@ export default {
             if (val == '') {
                 this.$store.commit('setShoppingCart', [])
             } else {
-                updateMyShoppingCart(val.user_id).then(res => {
+                updateMyShoppingCart().then(res => {
                     this.$store.commit('setShoppingCart', res.data.shoppingCartData)
                 })
             }

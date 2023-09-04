@@ -93,7 +93,7 @@
 
 <script>
 import { ElMessage } from 'element-plus'
-import { getMyShopping } from '../service/index'
+import { deleteMyShoppingcCart } from '../service/index'
 export default {
     data() {
         return {}
@@ -111,7 +111,7 @@ export default {
         },
         deleteNum(id, productID) {
             // 点击删除按钮删除某个商品
-            getMyShopping(productID, this.$store.state.user.user.user_id).then(() => {
+            deleteMyShoppingcCart(productID).then(() => {
                 this.$store.commit('deleteProducts', id)
                 ElMessage({
                     message: '成功, 你已成功将该商品删除.',

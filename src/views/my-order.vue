@@ -107,7 +107,7 @@ export default {
         }
     },
     mounted() {
-        getMyOrder(this.$store.state.user.user.user_id).then(res => {
+        getMyOrder().then(res => {
             this.orders = res.data.orders
         })
     }
