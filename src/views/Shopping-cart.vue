@@ -31,12 +31,12 @@
                             @change="value => { this.$store.commit('updateCartItemcheckbox', { id: item.id, checkbox: value }) }"></el-checkbox>
                     </div>
                     <div class="pro-img">
-                        <router-link :to="{ path: '/allstore/details', query: { productID: item.productID } }">
+                        <router-link :to="{ path: '/details', query: { productID: item.productID } }">
                             <img :src="item.productImg" />
                         </router-link>
                     </div>
                     <div class="pro-name">
-                        <router-link :to="{ path: '/allstore/details', query: { productID: item.productID } }">{{
+                        <router-link :to="{ path: '/details', query: { productID: item.productID } }">{{
                             item.productName }}</router-link>
                     </div>
                     <div class="pro-price">{{ item.price }}元</div>

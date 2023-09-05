@@ -23,7 +23,7 @@ export const getSomeData = (api, categoryID, currentPage, pageSize) => axios({
     method: 'post',
     url: api,
     data: {
-        categoryID: categoryID,
+        categoryId: categoryID,
         currentPage: currentPage,
         pageSize: pageSize,
     }
@@ -33,7 +33,7 @@ export const getDetailsInfo = (productID) => axios({
     method: 'post',
     url: '/api/product/getDetails',
     data: {
-        productID: productID
+        productId: productID
     }
 })
 // 商品照片数据
@@ -41,7 +41,7 @@ export const getDetailsPictureInfo = (productID) => axios({
     method: 'post',
     url: '/api/product/getDetailsPicture',
     data: {
-        productID: productID
+        productId: productID
     }
 })
 // 添加购物车接口

@@ -103,13 +103,13 @@ export default {
         // 获取商品详细信息数据
         getDetails() {
             getDetailsInfo(this.$route.query.productID).then(res => {
-                this.productDetails = res.data.Product[0]
+                this.productDetails = res.data.product[0]
             })
         },
         // 获取商品图片数据
         getDetailsPicture() {
             getDetailsPictureInfo(this.$route.query.productID).then(res => {
-                this.productPicture = res.data.ProductPicture
+                this.productPicture = res.data.productPicture
             })
         },
         addCollect() {
