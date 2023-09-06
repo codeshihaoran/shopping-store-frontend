@@ -16,7 +16,7 @@ export const getHomeShoppingData = (api, Productcategory) => axios({
 // 全部商品列表页数据
 export const getAllCategoryList = () => axios({
     method: "post",
-    url: "/api/product/getCategory"
+    url: "/api/product/category/get"
 })
 // 获取全部商品或者列表商品数据
 export const getSomeData = (api, categoryID, currentPage, pageSize) => axios({
@@ -31,7 +31,7 @@ export const getSomeData = (api, categoryID, currentPage, pageSize) => axios({
 // 商品信息数据
 export const getDetailsInfo = (productID) => axios({
     method: 'post',
-    url: '/api/product/getDetails',
+    url: '/api/product/details/get',
     data: {
         productId: productID
     }
@@ -39,7 +39,7 @@ export const getDetailsInfo = (productID) => axios({
 // 商品照片数据
 export const getDetailsPictureInfo = (productID) => axios({
     method: 'post',
-    url: '/api/product/getDetailsPicture',
+    url: '/api/product/detailsPicture/get',
     data: {
         productId: productID
     }
@@ -47,7 +47,7 @@ export const getDetailsPictureInfo = (productID) => axios({
 // 添加购物车接口
 export const addMyShopping = (product_id) => axios({
     method: 'post',
-    url: '/api/user/shoppingCart/addShoppingCart',
+    url: '/api/user/shoppingCart/add',
     data: {
         product_id: product_id
     }
@@ -55,7 +55,7 @@ export const addMyShopping = (product_id) => axios({
 // 添加我的收藏接口
 export const addMyCollect = (product_id) => axios({
     method: 'post',
-    url: '/api/user/collect/addCollect',
+    url: '/api/user/collect/add',
     data: {
         product_id: product_id,
     }
@@ -63,12 +63,12 @@ export const addMyCollect = (product_id) => axios({
 // 我的收藏接口
 export const getCollect = () => axios({
     method: "post",
-    url: "/api/user/collect/getCollect",
+    url: "/api/user/collect/get",
 })
 // 我的添加订单接口
 export const addMyOrder = (products) => axios({
     method: 'post',
-    url: '/api/user/order/addOrder',
+    url: '/api/user/order/add',
     data: {
         products: products
     }
@@ -76,12 +76,12 @@ export const addMyOrder = (products) => axios({
 // 我的订单接口
 export const getMyOrder = () => axios({
     method: 'post',
-    url: '/api/user/order/getOrder',
+    url: '/api/user/order/get',
 })
 // 购物车接口
 export const deleteMyShoppingcCart = (product_id) => axios({
     method: 'post',
-    url: '/api/user/shoppingCart/deleteShoppingCart',
+    url: '/api/user/shoppingCart/delete',
     data: {
         product_id: product_id,
     }
@@ -89,7 +89,7 @@ export const deleteMyShoppingcCart = (product_id) => axios({
 // 监听购物车更新
 export const updateMyShoppingCart = () => axios({
     method: 'post',
-    url: '/api/user/shoppingCart/getShoppingCart',
+    url: '/api/user/shoppingCart/get',
 })
 // 登录接口
 export const loginUser = (userName, password) => axios({
