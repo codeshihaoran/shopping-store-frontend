@@ -135,12 +135,12 @@ export default {
         this.getPromo(
             ["电视机", "空调", "洗衣机"],
             "applianceList",
-            "/api/product/getHotProduct"
+            "/api/product/hotProduct/get"
         );//获取家电数据
         this.getPromo(
             ["保护套", "保护膜", "充电器", "充电宝"],
             "accessoryList",
-            "/api/product/getHotProduct"
+            "/api/product/hotProduct/get"
         );
         this.change(1)
     },
@@ -153,7 +153,7 @@ export default {
         },
         // 获取各类商品数据时使用了一个封装的方法
         getPromo(Productcategory, val, api) {
-            api = api != undefined ? api : '/api/product/getPromoProduct';
+            api = api != undefined ? api : '/api/product/promoProduct/get';
             getHomeShoppingData(api, Productcategory).then(res => {
                 this[val] = res.data.products
             })

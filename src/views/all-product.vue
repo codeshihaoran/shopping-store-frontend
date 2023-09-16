@@ -102,8 +102,8 @@ export default {
         // 获取全部商品数据或者列表页商品数据
         getData() {
             const api = this.categoryID.length == 0
-                ? '/api/product/getAllProduct'
-                : '/api/product/getProductByCategory'
+                ? '/api/product/allProduct/get'
+                : '/api/product/productByCategory/get'
             getSomeData(api, this.categoryID, this.currentPage, this.pageSize).then(res => {
                 this.product = res.data.products
                 this.total = res.data.total
