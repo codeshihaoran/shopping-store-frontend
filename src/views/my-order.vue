@@ -23,7 +23,7 @@
                             订单编号：{{ item[0].order_id }}
                         </div>
                         <div class="order-time">
-                            订单时间：{{ item[0].order_time }}
+                            订单时间：{{ item[0].orderTime }}
                         </div>
                     </li>
                     <li class="header">
@@ -108,7 +108,20 @@ export default {
     },
     mounted() {
         getMyOrder().then(res => {
-            this.orders = res.data.orders
+            this.orders = res.data.orders.map(item => {
+                return item.map(order => {
+                    const orderDate = new Date(order.order_time)
+                    let year = orderDate.getFullYear()
+                    const month = orderDate.getMonth() + 1
+                    const day = orderDate.getDate()
+                    const hours = orderDate.getHours()
+                    const minutes = orderDate.getMinutes()
+                    const seconds = orderDate.getSeconds()
+                    const nowTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`
+                    order.orderTime = nowTime
+                    return order
+                })
+            })
         })
     }
 }

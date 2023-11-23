@@ -3,7 +3,7 @@
         <TopBar></TopBar>
 
         <el-header>
-            <Header></Header>
+            <AppHeader></AppHeader>
         </el-header>
 
         <el-main>
@@ -13,22 +13,22 @@
         </el-main>
 
         <el-footer>
-            <Footer></Footer>
+            <AppFooter></AppFooter>
         </el-footer>
 
     </el-container>
 </template>
 <script>
 import TopBar from './compentens/app-topbar.vue';
-import Header from './compentens/app-header.vue';
-import Footer from './compentens/app-footer.vue';
+import AppHeader from './compentens/app-header.vue';
+import AppFooter from './compentens/app-footer.vue';
 import { mapGetters } from 'vuex'
 import { updateMyShoppingCart } from '../src/service/index'
 export default {
     components: {
         TopBar,
-        Header,
-        Footer,
+        AppHeader,
+        AppFooter,
     },
     computed: {
         ...mapGetters(['getUser'])
