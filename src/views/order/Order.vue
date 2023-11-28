@@ -18,6 +18,20 @@
         <div v-if="orders.length > 0" class="order-main">
             <div v-for="(order, index) in orders" :key="index" class="main">
                 <orderitem :order="order"></orderitem>
+                <div class="order-last">
+                    <div class="last-left">
+                        <span class="order-total">
+                            共
+                            <span class="order-total-num">{{ allsum[index].allnum }}</span> 件商品
+                        </span>
+                    </div>
+                    <div class="last-right">
+                        <span>
+                            <span class="total-price-title">合计：</span>
+                            <span class="total-price">{{ allsum[index].allprice }}元</span>
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- 订单信息结束 -->
@@ -45,12 +59,42 @@ export default {
     data() {
         return {
             orders: [],
+            allsum: []
+        }
+    },
+    watch: {
+        orders: function (val) {
+            let allsum = []
+            for (let i = 0; i < val.length; i++) {
+                const firstArr = val[i]
+                let allnum = 0
+                let allprice = 0
+                for (let j = 0; j < firstArr.length; j++) {
+                    const temp = firstArr[j]
+                    allnum = allnum + temp.product_num
+                    allprice = allprice + temp.product_num * temp.product_price
+                }
+                allsum.push({ allnum, allprice })
+            }
+            this.allsum = allsum
         }
     },
     mounted() {
-        getMyOrder(this.$store.state.user.user.user_id).then(res => {
-            this.orders = res.data.orders
-            console.log(res.data.orders);
+        getMyOrder().then(res => {
+            this.orders = res.data.orders.map(item => {
+                return item.map(order => {
+                    const orderDate = new Date(order.order_time)
+                    let year = orderDate.getFullYear()
+                    const month = orderDate.getMonth() + 1
+                    const day = orderDate.getDate()
+                    const hours = orderDate.getHours()
+                    const minutes = orderDate.getMinutes()
+                    const seconds = orderDate.getSeconds()
+                    const nowTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`
+                    order.orderTime = nowTime
+                    return order
+                })
+            })
         })
 
     },
@@ -105,5 +149,49 @@ export default {
 .order-empty .empty p {
     margin: 0 0 20px;
     font-size: 20px;
+}
+
+.order-main .main {
+    width: 1225px;
+    margin: 0 auto;
+    background-color: #fff;
+    margin-bottom: 50px;
+}
+
+.order-last {
+    width: 1225px;
+    padding: 0 20px;
+    border-top: 1px solid #ff6700;
+    height: 50px;
+    line-height: 50px;
+    background-color: #fff;
+}
+
+.order-last .last-left {
+    float: left;
+}
+
+.order-last .last-right {
+    float: right;
+}
+
+.order-last .last-right .total-price-title {
+    color: #ff6700;
+    font-size: 14px;
+}
+
+.order-last .last-right .total-price {
+
+    color: #ff6700;
+    font-size: 30px;
+}
+
+.order-last .last-left .order-total {
+
+    color: #757575;
+}
+
+.order-last .last-left .order-total-num {
+    color: #ff6700;
 }
 </style>
