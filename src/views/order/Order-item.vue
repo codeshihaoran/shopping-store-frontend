@@ -5,7 +5,7 @@
                 订单编号：{{ order[0].order_id }}
             </div>
             <div class="order-time">
-                订单时间：{{ order[0].order_time }}
+                订单时间：{{ order[0].orderTime }}
             </div>
         </li>
         <li class="header">
@@ -17,12 +17,12 @@
         </li>
         <li v-for="(product, i) in order" :key="i" class="product-list">
             <div class="pro-img">
-                <router-link :to="{ path: '/allstore/details', query: { productID: product.product_id } }">
-                    <img :src="/api/ + product.product_picture" alt="">
+                <router-link :to="{ path: '/details', query: { productID: product.product_id } }">
+                    <img :src="product.product_picture" alt="">
                 </router-link>
             </div>
             <div class="pro-name">
-                <router-link :to="{ path: '/allstore/details', query: { productID: product.product_id } }">
+                <router-link :to="{ path: '/details', query: { productID: product.product_id } }">
                     {{ product.product_name }}
                 </router-link>
             </div>
@@ -31,20 +31,6 @@
             <div class="pro-total pro-total-in">{{ product.product_num * product.product_price }}元</div>
         </li>
     </ul>
-    <div class="order-last">
-        <div class="last-left">
-            <span class="order-total">
-                共
-                <span class="order-total-num">1</span> 件商品
-            </span>
-        </div>
-        <div class="last-right">
-            <span>
-                <span class="total-price-title">合计：</span>
-                <span class="total-price">2元</span>
-            </span>
-        </div>
-    </div>
 </template>
 <script>
 export default {
@@ -67,13 +53,6 @@ export default {
 }
 </script>
 <style scoped>
-.main {
-    width: 1225px;
-    margin: 0 auto;
-    background-color: #fff;
-    margin-bottom: 50px;
-}
-
 ul {
     padding-inline-start: 0px;
 }
@@ -194,43 +173,6 @@ ul li {
 }
 
 .product-list .pro-total-in {
-    color: #ff6700;
-}
-
-.order-last {
-    width: 1225px;
-    padding: 0 20px;
-    border-top: 1px solid #ff6700;
-    height: 50px;
-    line-height: 50px;
-    background-color: #fff;
-}
-
-.order-last .last-left {
-    float: left;
-}
-
-.order-last .last-right {
-    float: right;
-}
-
-.order-last .last-right .total-price-title {
-    color: #ff6700;
-    font-size: 14px;
-}
-
-.main .order-last .last-right .total-price {
-
-    color: #ff6700;
-    font-size: 30px;
-}
-
-.main .order-last .last-left .order-total {
-
-    color: #757575;
-}
-
-.main .order-last .last-left .order-total-num {
     color: #ff6700;
 }
 </style>
