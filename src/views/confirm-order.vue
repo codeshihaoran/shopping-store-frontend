@@ -154,7 +154,7 @@ export default {
             console.log('收货信息：', this.order_address, this.$store.getters.getUser.user_phone);
             // 获取加入我的订单的数据
             // 结算后要跳转到我的订单页面 并前将勾选的商品id删除
-            addMyOrder(this.$store.getters.getCheckedProducts, this.order_address, this.$store.getters.getUser.user_phone).then(() => {
+            addMyOrder(this.$store.getters.getCheckedProducts, this.order_address).then(() => {
                 let products = this.$store.getters.getCheckedProducts
                 // this.$store.commit(' deleteStore', res.data.products.id)
                 for (let i = 0; i < products.length; i++) {

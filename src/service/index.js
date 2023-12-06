@@ -66,13 +66,12 @@ export const getCollect = () => axios({
     url: "/api/user/collect/get",
 })
 // 我的添加订单接口
-export const addMyOrder = (products, order_address, order_phone) => axios({
+export const addMyOrder = (products, order_address) => axios({
     method: 'post',
     url: '/api/user/order/add',
     data: {
         products: products,
         order_address: order_address,
-        order_phone: order_phone
     }
 })
 // 我的订单接口
