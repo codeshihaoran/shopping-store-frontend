@@ -49,7 +49,7 @@ export const addMyShopping = (product_id) => axios({
     method: 'post',
     url: '/api/user/shoppingCart/add',
     data: {
-        product_id: product_id
+        product_id: product_id,
     }
 })
 // 添加我的收藏接口
@@ -66,11 +66,13 @@ export const getCollect = () => axios({
     url: "/api/user/collect/get",
 })
 // 我的添加订单接口
-export const addMyOrder = (products) => axios({
+export const addMyOrder = (products, order_address, order_phone) => axios({
     method: 'post',
     url: '/api/user/order/add',
     data: {
-        products: products
+        products: products,
+        order_address: order_address,
+        order_phone: order_phone
     }
 })
 // 我的订单接口

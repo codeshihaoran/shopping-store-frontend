@@ -15,15 +15,19 @@
         <!-- 确认订单内容 -->
         <div class="confirm-main">
             <div class="confirm-mainer">
+
                 <!-- 个人信息内容 -->
                 <div class="information">
+                    <p class="address">联系方式</p>
+                    <div class="phone">
+                        <el-input v-model="this.$store.getters.getUser.user_phone" placeholder="请输入内容" :disabled="true">
+                        </el-input>
+                    </div>
                     <p class="address">收货地址</p>
                     <div class="box">
-                        <div v-for="item in list" :key="item.id" class="three"
-                            :class="item.id == confirmAddress ? 'in-section' : ''">
-                            <p class="address">{{ item.name }}</p>
-                            <p class="num">{{ item.number }}</p>
-                            <p class="num">{{ item.address }}</p>
+                        <div class="three">
+                            <el-button type="text" @click="open">填写地址</el-button>
+
                         </div>
                     </div>
                 </div>
@@ -115,40 +119,42 @@ import { addMyOrder } from '../service/index';
 export default {
     data() {
         return {
-            confirmAddress: 1,
-            list: [
-                {
-                    id: 1,
-                    name: '石同学',
-                    number: '18393481934',
-                    address: '甘肃省 兰州市 兰州城市学院'
-                },
-                {
-                    id: 2,
-                    name: '石同学',
-                    number: '18393481934',
-                    address: '甘肃省 陇南市 **县 **镇 '
-                },
-                {
-                    id: 3,
-                    name: '###',
-                    number: '###',
-                    address: '请添加新的收获地址'
-                },
-            ]
+            order_address: ''
         }
     },
     mounted() {
         if (this.$store.getters.getCheckNum < 1) {
             this.$router.push({ path: '/shoppingCart' })
         }
+        console.log('user_phone：', this.$store.getters.getUser.user_phone)
     },
     methods: {
+        open() {
+            this.$prompt('请输入收货地址', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                inputPattern: /^.{11,14}$/,
+                inputErrorMessage: '地址格式不合适'
+            }).then(({ value }) => {
+                this.$message({
+                    type: 'success',
+                    message: '你的地址是: ' + value
+                });
+                this.order_address = value
+                console.log(this.order_address);
+            }).catch(() => {
+                this.$message({
+                    type: 'info',
+                    message: '取消输入'
+                });
+            });
+        },
         addOrder() {
             console.log('选中的商品：', this.$store.getters.getCheckedProducts);
+            console.log('收货信息：', this.order_address, this.$store.getters.getUser.user_phone);
             // 获取加入我的订单的数据
             // 结算后要跳转到我的订单页面 并前将勾选的商品id删除
-            addMyOrder(this.$store.getters.getCheckedProducts).then(() => {
+            addMyOrder(this.$store.getters.getCheckedProducts, this.order_address, this.$store.getters.getUser.user_phone).then(() => {
                 let products = this.$store.getters.getCheckedProducts
                 // this.$store.commit(' deleteStore', res.data.products.id)
                 for (let i = 0; i < products.length; i++) {
@@ -210,14 +216,22 @@ export default {
     line-height: 20px;
 }
 
+.confirm-main .information .phone {
+    width: 250px;
+    margin-bottom: 20px;
+}
+
 .confirm-main .information .box .three {
+    line-height: 165px;
+    text-align: center;
     float: left;
     width: 250px;
     height: 190px;
     border: 1px solid #e0e0e0;
-    padding: 15px 24px 0;
+    padding: 15px 15px;
     margin-right: 17px;
     margin-bottom: 24px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
 }
 
 .confirm-main .information .box .in-section {
