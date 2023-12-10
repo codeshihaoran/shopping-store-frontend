@@ -81,9 +81,11 @@ export default {
     },
     mounted() {
         getMyOrder().then(res => {
-            this.orders = res.data.orders.map(item => {
-                return item.map(order => {
-                    const orderDate = new Date(order.order_time)
+            this.orders = res.data.orders
+            for (let i = 0; i < this.orders.length; i++) {
+                const item = this.orders[i]
+                for (let j = 0; j < item.length; j++) {
+                    const orderDate = new Date(item[0].order_time)
                     let year = orderDate.getFullYear()
                     const month = orderDate.getMonth() + 1
                     const day = orderDate.getDate()
@@ -91,11 +93,11 @@ export default {
                     const minutes = orderDate.getMinutes()
                     const seconds = orderDate.getSeconds()
                     const nowTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`
-                    order.orderTime = nowTime
-                    return order
-                })
-            })
-        })
+                    item[0].orderTime = nowTime
+                }
+            }
+        }
+        )
 
     },
 }
