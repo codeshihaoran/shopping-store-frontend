@@ -105,7 +105,7 @@
             <div class="btn">
                 <div class="btnnn">
                     <router-link to="/shoppingCart" class="btn-base btn-return">返回购物车</router-link>
-                    <a href="javascript:;" class="btn-base btn-primary" @click="addOrder">结算</a>
+                    <a href="javascript:;" class="btn-base btn-primary" @click="addOrder(1)">结算</a>
                 </div>
             </div>
         </div>
@@ -149,12 +149,12 @@ export default {
                 });
             });
         },
-        addOrder() {
+        addOrder(order_status) {
             console.log('选中的商品：', this.$store.getters.getCheckedProducts);
             console.log('收货信息：', this.order_address, this.$store.getters.getUser.user_phone);
             // 获取加入我的订单的数据
             // 结算后要跳转到我的订单页面 并前将勾选的商品id删除
-            addMyOrder(this.$store.getters.getCheckedProducts, this.order_address).then(() => {
+            addMyOrder(this.$store.getters.getCheckedProducts, this.order_address, order_status).then(() => {
                 let products = this.$store.getters.getCheckedProducts
                 // this.$store.commit(' deleteStore', res.data.products.id)
                 for (let i = 0; i < products.length; i++) {
