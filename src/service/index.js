@@ -120,3 +120,13 @@ export const checkRegister = (userName) => axios({
         userName: userName
     }
 })
+export const orderPay = (order_status, order_id) => axios(
+    {
+        method: 'post',
+        url: '/api/user/order/edit',
+        data: {
+            order_status: order_status,
+            order_id: order_id
+        }
+    }
+)

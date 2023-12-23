@@ -26,7 +26,11 @@
                         </span>
                     </div>
                     <div class="last-right">
-                        <span>
+                        <span v-if="order[0].order_status === 0">
+                            <span class="total-price-pay">还未支付：</span>
+                            <a href="javascript:;" @click="orderPay(1, order[0].order_id)" class="total-pay">去支付</a>
+                        </span>
+                        <span v-else>
                             <span class="total-price-title">合计：</span>
                             <span class="total-price">{{ allsum[index].allprice }}元</span>
                         </span>
@@ -52,6 +56,8 @@
 <script>
 import orderitem from './Order-item.vue'
 import { getMyOrder } from '/src/service/index'
+import { orderPay } from '/src/service/index'
+import { ElMessage } from 'element-plus'
 export default {
     components: {
         orderitem,
@@ -98,8 +104,20 @@ export default {
             }
         }
         )
-
     },
+    methods: {
+        orderPay(order_status, order_id) {
+            orderPay(order_status, order_id).then(res => {
+                window.location.reload();
+                ElMessage({
+                    message: res.data.msg,
+                    type: 'success',
+                })
+            }).catch(err => {
+                console.log(err);
+            })
+        }
+    }
 }
 </script>
 <style scoped>
@@ -183,17 +201,29 @@ export default {
 }
 
 .order-last .last-right .total-price {
-
     color: #ff6700;
     font-size: 30px;
 }
 
 .order-last .last-left .order-total {
-
     color: #757575;
 }
 
 .order-last .last-left .order-total-num {
     color: #ff6700;
+}
+
+a {
+    font-size: 20px;
+}
+
+a:hover {
+    color: #ff6700;
+    text-decoration: underline;
+}
+
+.total-price-pay {
+    color: #757575;
+    font-size: 14px;
 }
 </style>
