@@ -3,12 +3,12 @@
 基于`vue选项式API`开发的一个购物商城项目
 
 ## 技术栈
-前端基于：`Vue2`+`Vue-router`+`vuex`+`elementui`+`Axios`
+前端基于：`Vue3`+`Vue-router`+`Vuex`+`ElementUI`+`Axios`
 
 ## 项目背景
 
 ### 项目前言
-在大一期间，我学习了`vue`和一些工具的开发，想通过做项目去锻炼个人的动手能力。
+在大一期间，我学习了`Vue`和一些工具的开发，想通过做项目去锻炼个人的动手能力。
 
 ### 项目来源
 于是在大一下学期，学生模仿[小海同学](https://github.com/hai-27)搭建的[小米购物商城](https://github.com/hai-27/vue-store)项目，采用不同的方式和思路搭建本项目。
